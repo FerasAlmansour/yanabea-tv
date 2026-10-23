@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="referrer" content="strict-origin-when-cross-origin"/>
-    <title>ينابيع المعرفة</title>
+    <title>أفلام كرتون</title>
     <style>
 /* Written for old Samsung TV browsers (Chromium 56 / Tizen 5.0):
    no CSS grid, flex gap, aspect-ratio, inset, clamp() or logical properties. */
@@ -152,6 +152,22 @@ body.theater #box{position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height
 body.theater #box::before{display:none}
 body.theater #overlay{padding:6rem 3rem 1.6rem}
 
+/* home (series shelf) */
+#home{display:none;flex:1;min-height:0;overflow-y:auto}
+body.home #home{display:block}
+body.home #main,body.home #overall,body.home #homeBtn{display:none}
+#homeBtn{margin-left:1rem}
+#shelf{display:flex;flex-wrap:wrap;padding:1rem .5rem}
+.series{width:30%;margin:0 1.5% 2rem;padding:.7rem;border-radius:1.4rem;background:#101830;border:1px solid var(--line);text-align:right;display:block;transition:transform .15s}
+.series .im{position:relative;width:100%;border-radius:1rem;overflow:hidden;background:#000}
+.series .im::before{content:"";display:block;padding-top:56.25%}
+.series .im img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+.series .sb{padding:.9rem .4rem .3rem}
+.series h3{font-size:1.7rem}
+.series p{color:var(--mut);font-size:1.05rem;margin:.3rem 0}
+.series .cnt{color:#fbbf24;font-size:1rem;font-weight:700;margin-bottom:.6rem}
+body.kbd .series:focus{box-shadow:0 0 0 .25rem #fbbf24,0 0 1.6rem rgba(251,191,36,.45);transform:scale(1.04)}
+
 </style>
 </head>
 <body>
@@ -164,11 +180,14 @@ body.theater #overlay{padding:6rem 3rem 1.6rem}
                 <p id="plSub"></p>
             </div>
         </div>
+        <button id="homeBtn" class="chip f">‹ المسلسلات</button>
         <div id="overall">
             <span id="overallTxt"></span>
             <div class="mini"><i id="overallFill"></i></div>
         </div>
     </header>
+
+    <section id="home"><div id="shelf"></div></section>
 
     <main id="main">
         <section id="left">
@@ -247,451 +266,1040 @@ body.theater #overlay{padding:6rem 3rem 1.6rem}
     <div id="toast"></div>
 </div>
 <script>
-/* Generated from YouTube playlist PLzoSbdrdcfWXD5VBs5_kh0B16dJSZHF6Z */
-window.PLAYLIST = {
- "id": "PLzoSbdrdcfWXD5VBs5_kh0B16dJSZHF6Z",
- "title": "ينابيع المعرفة",
- "subtitle": "كرتون ينابيع المعرفة - حلقات كاملة",
- "items": [
-  {
-   "id": "Ih0B4yT5u_Q",
-   "title": "ينابيع المعرفة الحلقة الأولى",
-   "dur": "12:43",
-   "sec": 763
-  },
-  {
-   "id": "E3m7GN9_dxs",
-   "title": "ينابيع المعرفة الحلقة 2",
-   "dur": "12:42",
-   "sec": 762
-  },
-  {
-   "id": "HgpOO_-c6Is",
-   "title": "ينابيع المعرفة الحلقة 3",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "ddJ4e3uY0Oo",
-   "title": "ينابيع المعرفة الحلقة 4",
-   "dur": "12:47",
-   "sec": 767
-  },
-  {
-   "id": "lX-oTUKmSQo",
-   "title": "ينابيع المعرفة الحلقة 5",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "9jFTBCIJNkI",
-   "title": "ينابيع المعرفة الحلقة 6",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "urEin6xIfkQ",
-   "title": "ينابيع المعرفة الحلقة 7",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "IMLTL_mFrSg",
-   "title": "ينابيع المعرفة الحلقة 8",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "y8RmS-WwvBk",
-   "title": "ينابيع المعرفة الحلقة 9",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "ET0lljQ9ai0",
-   "title": "ينابيع المعرفة الحلقة 10",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "DdioBeEee94",
-   "title": "ينابيع المعرفة الحلقة 11",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "3KojavxjJdE",
-   "title": "ينابيع المعرفة الحلقة 13",
-   "dur": "12:40",
-   "sec": 760
-  },
-  {
-   "id": "rydCClOafOg",
-   "title": "ينابيع المعرفة الحلقة 14",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "fn3sYf5A24U",
-   "title": "ينابيع المعرفة الحلقة 15",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "JyPmUAF_OGI",
-   "title": "ينابيع المعرفة الحلقة 16",
-   "dur": "12:42",
-   "sec": 762
-  },
-  {
-   "id": "2BcXtRaPbVI",
-   "title": "ينابيع المعرفة الحلقة 17",
-   "dur": "12:42",
-   "sec": 762
-  },
-  {
-   "id": "JipXpD46zkA",
-   "title": "ينابيع المعرفة الحلقة 18",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "dhtSCin1Hvg",
-   "title": "ينابيع المعرفة الحلقة 19",
-   "dur": "12:43",
-   "sec": 763
-  },
-  {
-   "id": "n1cQNEnDMoM",
-   "title": "ينابيع المعرفة الحلقة 20",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "trkQaQVwUYg",
-   "title": "ينابيع المعرفة الحلقة 21",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "d1JzHeuAnTI",
-   "title": "ينابيع المعرفة الحلقة 22",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "lzLoqwKQkRw",
-   "title": "ينابيع المعرفة الحلقة 23",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "LaSzKa4DbJw",
-   "title": "ينابيع المعرفة الحلقة 25",
-   "dur": "12:40",
-   "sec": 760
-  },
-  {
-   "id": "S18RS9LVnI0",
-   "title": "ينابيع المعرفة الحلقة 26",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "wR6pLihO7zs",
-   "title": "ينابيع المعرفة الحلقة 27",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "Ev-xwKUOpDE",
-   "title": "ينابيع المعرفة الحلقة 28",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "6Zrr7wXj_1Y",
-   "title": "ينابيع المعرفة الحلقة 29",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "9BKx2BGoQrQ",
-   "title": "ينابيع المعرفة الحلقة 30",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "uPOrcA6wWro",
-   "title": "ينابيع المعرفة الحلقة 31",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "X96QpbStiFk",
-   "title": "ينابيع المعرفة الحلقة 32",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "tk0OWZtZw4E",
-   "title": "ينابيع المعرفة الحلقة 33",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "7mGrjAWSUlY",
-   "title": "ينابيع المعرفة الحلقة 34",
-   "dur": "12:27",
-   "sec": 747
-  },
-  {
-   "id": "7uTR9r66izk",
-   "title": "ينابيع المعرفة الحلقة 35",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "66d9gxBj-Jk",
-   "title": "ينابيع المعرفة الحلقة 36",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "66FwfMVEsh4",
-   "title": "ينابيع المعرفة الحلقة 37",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "V-Gl1UNBAoY",
-   "title": "ينابيع المعرفة الحلقة 38",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "0FqPH5At2lk",
-   "title": "ينابيع المعرفة الحلقة 39",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "wi4zCApuw_k",
-   "title": "ينابيع المعرفة الحلقة 40",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "98vAZOTwBIc",
-   "title": "ينابيع المعرفة الحلقة 41",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "dTW1y2pRiKY",
-   "title": "ينابيع المعرفة الحلقة 42",
-   "dur": "12:28",
-   "sec": 748
-  },
-  {
-   "id": "xgXREpFqr4M",
-   "title": "ينابيع المعرفة الحلقة 43",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "n9P7ugRkMKU",
-   "title": "ينابيع المعرفة الحلقة 44",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "psoXwgl_IZs",
-   "title": "ينابيع المعرفة الحلقة 45",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "DatWOrdiW1o",
-   "title": "ينابيع المعرفة الحلقة 46",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "oZsKD1YR1TU",
-   "title": "ينابيع المعرفة الحلقة 47",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "aCJ1zKZqCRM",
-   "title": "ينابيع المعرفة الحلقة 48",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "dT2fjbjWnsU",
-   "title": "ينابيع المعرفة الحلقة 49",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "_Tc0ZyOWFx8",
-   "title": "ينابيع المعرفة الحلقة 50",
-   "dur": "12:41",
-   "sec": 761
-  },
-  {
-   "id": "zJRUjl26MBo",
-   "title": "ينابيع المعرفة الحلقة 51",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "vphvtsJ2a4Q",
-   "title": "ينابيع المعرفة الحلقة 52",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "7NmwPEHYzF4",
-   "title": "ينابيع المعرفة الحلقة 53",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "Kbh7YSnDP34",
-   "title": "ينابيع المعرفة الحلقة 54",
-   "dur": "12:47",
-   "sec": 767
-  },
-  {
-   "id": "VUlw_M3dT0Y",
-   "title": "ينابيع المعرفة الحلقة 55",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "VElpnDcIdyY",
-   "title": "ينابيع المعرفة الحلقة 56",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "UIvgqXXAn6s",
-   "title": "ينابيع المعرفة الحلقة 57",
-   "dur": "12:38",
-   "sec": 758
-  },
-  {
-   "id": "pmqMOvKu_kU",
-   "title": "ينابيع المعرفة الحلقة 58",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "1KqsyFCIkmk",
-   "title": "ينابيع المعرفة الحلقة 59",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "mu17F_QQSoI",
-   "title": "ينابيع المعرفة الحلقة 60",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "sRmlN5CLLt4",
-   "title": "ينابيع المعرفة الحلقة 61",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "owBeJIb_gEU",
-   "title": "ينابيع المعرفة الحلقة 62",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "lXPZVW3QmxU",
-   "title": "ينابيع المعرفة الحلقة 64",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "JTzarCkmy30",
-   "title": "ينابيع المعرفة الحلقة 65",
-   "dur": "12:44",
-   "sec": 764
-  },
-  {
-   "id": "Clrnhi3-Z50",
-   "title": "ينابيع المعرفة الحلقة 66",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "zDjf2ub-KEI",
-   "title": "ينابيع المعرفة الحلقة 67",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "cGQJtGWjb5E",
-   "title": "ينابيع المعرفة الحلقة 68",
-   "dur": "12:45",
-   "sec": 765
-  },
-  {
-   "id": "5DGJ_73hcqo",
-   "title": "ينابيع المعرفة الحلقة 69",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "RNGQ2GBi4kE",
-   "title": "ينابيع المعرفة الحلقة 70",
-   "dur": "12:47",
-   "sec": 767
-  },
-  {
-   "id": "hXT-7mPRc0k",
-   "title": "ينابيع المعرفة الحلقة 71",
-   "dur": "12:43",
-   "sec": 763
-  },
-  {
-   "id": "nN9G_fqkZD8",
-   "title": "ينابيع المعرفة الحلقة 72",
-   "dur": "12:46",
-   "sec": 766
-  },
-  {
-   "id": "BywOlLBNK5g",
-   "title": "ينابيع المعرفة الحلقة 73 و الأخيرة",
-   "dur": "12:47",
-   "sec": 767
-  }
- ]
-};
+/* Generated from YouTube playlists */
+window.LIBRARY = [
+ {
+  "id": "PLzoSbdrdcfWXD5VBs5_kh0B16dJSZHF6Z",
+  "title": "ينابيع المعرفة",
+  "subtitle": "كرتون ينابيع المعرفة - حلقات كاملة",
+  "items": [
+   {
+    "id": "Ih0B4yT5u_Q",
+    "title": "ينابيع المعرفة الحلقة الأولى",
+    "name": "ينابيع المعرفة الحلقة الأولى",
+    "ep": 1,
+    "last": false,
+    "dur": "12:43",
+    "sec": 763
+   },
+   {
+    "id": "E3m7GN9_dxs",
+    "title": "ينابيع المعرفة الحلقة 2",
+    "name": "ينابيع المعرفة الحلقة 2",
+    "ep": 2,
+    "last": false,
+    "dur": "12:42",
+    "sec": 762
+   },
+   {
+    "id": "HgpOO_-c6Is",
+    "title": "ينابيع المعرفة الحلقة 3",
+    "name": "ينابيع المعرفة الحلقة 3",
+    "ep": 3,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "ddJ4e3uY0Oo",
+    "title": "ينابيع المعرفة الحلقة 4",
+    "name": "ينابيع المعرفة الحلقة 4",
+    "ep": 4,
+    "last": false,
+    "dur": "12:47",
+    "sec": 767
+   },
+   {
+    "id": "lX-oTUKmSQo",
+    "title": "ينابيع المعرفة الحلقة 5",
+    "name": "ينابيع المعرفة الحلقة 5",
+    "ep": 5,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "9jFTBCIJNkI",
+    "title": "ينابيع المعرفة الحلقة 6",
+    "name": "ينابيع المعرفة الحلقة 6",
+    "ep": 6,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "urEin6xIfkQ",
+    "title": "ينابيع المعرفة الحلقة 7",
+    "name": "ينابيع المعرفة الحلقة 7",
+    "ep": 7,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "IMLTL_mFrSg",
+    "title": "ينابيع المعرفة الحلقة 8",
+    "name": "ينابيع المعرفة الحلقة 8",
+    "ep": 8,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "y8RmS-WwvBk",
+    "title": "ينابيع المعرفة الحلقة 9",
+    "name": "ينابيع المعرفة الحلقة 9",
+    "ep": 9,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "ET0lljQ9ai0",
+    "title": "ينابيع المعرفة الحلقة 10",
+    "name": "ينابيع المعرفة الحلقة 10",
+    "ep": 10,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "DdioBeEee94",
+    "title": "ينابيع المعرفة الحلقة 11",
+    "name": "ينابيع المعرفة الحلقة 11",
+    "ep": 11,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "3KojavxjJdE",
+    "title": "ينابيع المعرفة الحلقة 13",
+    "name": "ينابيع المعرفة الحلقة 13",
+    "ep": 13,
+    "last": false,
+    "dur": "12:40",
+    "sec": 760
+   },
+   {
+    "id": "rydCClOafOg",
+    "title": "ينابيع المعرفة الحلقة 14",
+    "name": "ينابيع المعرفة الحلقة 14",
+    "ep": 14,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "fn3sYf5A24U",
+    "title": "ينابيع المعرفة الحلقة 15",
+    "name": "ينابيع المعرفة الحلقة 15",
+    "ep": 15,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "JyPmUAF_OGI",
+    "title": "ينابيع المعرفة الحلقة 16",
+    "name": "ينابيع المعرفة الحلقة 16",
+    "ep": 16,
+    "last": false,
+    "dur": "12:42",
+    "sec": 762
+   },
+   {
+    "id": "2BcXtRaPbVI",
+    "title": "ينابيع المعرفة الحلقة 17",
+    "name": "ينابيع المعرفة الحلقة 17",
+    "ep": 17,
+    "last": false,
+    "dur": "12:42",
+    "sec": 762
+   },
+   {
+    "id": "JipXpD46zkA",
+    "title": "ينابيع المعرفة الحلقة 18",
+    "name": "ينابيع المعرفة الحلقة 18",
+    "ep": 18,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "dhtSCin1Hvg",
+    "title": "ينابيع المعرفة الحلقة 19",
+    "name": "ينابيع المعرفة الحلقة 19",
+    "ep": 19,
+    "last": false,
+    "dur": "12:43",
+    "sec": 763
+   },
+   {
+    "id": "n1cQNEnDMoM",
+    "title": "ينابيع المعرفة الحلقة 20",
+    "name": "ينابيع المعرفة الحلقة 20",
+    "ep": 20,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "trkQaQVwUYg",
+    "title": "ينابيع المعرفة الحلقة 21",
+    "name": "ينابيع المعرفة الحلقة 21",
+    "ep": 21,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "d1JzHeuAnTI",
+    "title": "ينابيع المعرفة الحلقة 22",
+    "name": "ينابيع المعرفة الحلقة 22",
+    "ep": 22,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "lzLoqwKQkRw",
+    "title": "ينابيع المعرفة الحلقة 23",
+    "name": "ينابيع المعرفة الحلقة 23",
+    "ep": 23,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "LaSzKa4DbJw",
+    "title": "ينابيع المعرفة الحلقة 25",
+    "name": "ينابيع المعرفة الحلقة 25",
+    "ep": 25,
+    "last": false,
+    "dur": "12:40",
+    "sec": 760
+   },
+   {
+    "id": "S18RS9LVnI0",
+    "title": "ينابيع المعرفة الحلقة 26",
+    "name": "ينابيع المعرفة الحلقة 26",
+    "ep": 26,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "wR6pLihO7zs",
+    "title": "ينابيع المعرفة الحلقة 27",
+    "name": "ينابيع المعرفة الحلقة 27",
+    "ep": 27,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "Ev-xwKUOpDE",
+    "title": "ينابيع المعرفة الحلقة 28",
+    "name": "ينابيع المعرفة الحلقة 28",
+    "ep": 28,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "6Zrr7wXj_1Y",
+    "title": "ينابيع المعرفة الحلقة 29",
+    "name": "ينابيع المعرفة الحلقة 29",
+    "ep": 29,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "9BKx2BGoQrQ",
+    "title": "ينابيع المعرفة الحلقة 30",
+    "name": "ينابيع المعرفة الحلقة 30",
+    "ep": 30,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "uPOrcA6wWro",
+    "title": "ينابيع المعرفة الحلقة 31",
+    "name": "ينابيع المعرفة الحلقة 31",
+    "ep": 31,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "X96QpbStiFk",
+    "title": "ينابيع المعرفة الحلقة 32",
+    "name": "ينابيع المعرفة الحلقة 32",
+    "ep": 32,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "tk0OWZtZw4E",
+    "title": "ينابيع المعرفة الحلقة 33",
+    "name": "ينابيع المعرفة الحلقة 33",
+    "ep": 33,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "7mGrjAWSUlY",
+    "title": "ينابيع المعرفة الحلقة 34",
+    "name": "ينابيع المعرفة الحلقة 34",
+    "ep": 34,
+    "last": false,
+    "dur": "12:27",
+    "sec": 747
+   },
+   {
+    "id": "7uTR9r66izk",
+    "title": "ينابيع المعرفة الحلقة 35",
+    "name": "ينابيع المعرفة الحلقة 35",
+    "ep": 35,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "66d9gxBj-Jk",
+    "title": "ينابيع المعرفة الحلقة 36",
+    "name": "ينابيع المعرفة الحلقة 36",
+    "ep": 36,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "66FwfMVEsh4",
+    "title": "ينابيع المعرفة الحلقة 37",
+    "name": "ينابيع المعرفة الحلقة 37",
+    "ep": 37,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "V-Gl1UNBAoY",
+    "title": "ينابيع المعرفة الحلقة 38",
+    "name": "ينابيع المعرفة الحلقة 38",
+    "ep": 38,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "0FqPH5At2lk",
+    "title": "ينابيع المعرفة الحلقة 39",
+    "name": "ينابيع المعرفة الحلقة 39",
+    "ep": 39,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "wi4zCApuw_k",
+    "title": "ينابيع المعرفة الحلقة 40",
+    "name": "ينابيع المعرفة الحلقة 40",
+    "ep": 40,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "98vAZOTwBIc",
+    "title": "ينابيع المعرفة الحلقة 41",
+    "name": "ينابيع المعرفة الحلقة 41",
+    "ep": 41,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "dTW1y2pRiKY",
+    "title": "ينابيع المعرفة الحلقة 42",
+    "name": "ينابيع المعرفة الحلقة 42",
+    "ep": 42,
+    "last": false,
+    "dur": "12:28",
+    "sec": 748
+   },
+   {
+    "id": "xgXREpFqr4M",
+    "title": "ينابيع المعرفة الحلقة 43",
+    "name": "ينابيع المعرفة الحلقة 43",
+    "ep": 43,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "n9P7ugRkMKU",
+    "title": "ينابيع المعرفة الحلقة 44",
+    "name": "ينابيع المعرفة الحلقة 44",
+    "ep": 44,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "psoXwgl_IZs",
+    "title": "ينابيع المعرفة الحلقة 45",
+    "name": "ينابيع المعرفة الحلقة 45",
+    "ep": 45,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "DatWOrdiW1o",
+    "title": "ينابيع المعرفة الحلقة 46",
+    "name": "ينابيع المعرفة الحلقة 46",
+    "ep": 46,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "oZsKD1YR1TU",
+    "title": "ينابيع المعرفة الحلقة 47",
+    "name": "ينابيع المعرفة الحلقة 47",
+    "ep": 47,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "aCJ1zKZqCRM",
+    "title": "ينابيع المعرفة الحلقة 48",
+    "name": "ينابيع المعرفة الحلقة 48",
+    "ep": 48,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "dT2fjbjWnsU",
+    "title": "ينابيع المعرفة الحلقة 49",
+    "name": "ينابيع المعرفة الحلقة 49",
+    "ep": 49,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "_Tc0ZyOWFx8",
+    "title": "ينابيع المعرفة الحلقة 50",
+    "name": "ينابيع المعرفة الحلقة 50",
+    "ep": 50,
+    "last": false,
+    "dur": "12:41",
+    "sec": 761
+   },
+   {
+    "id": "zJRUjl26MBo",
+    "title": "ينابيع المعرفة الحلقة 51",
+    "name": "ينابيع المعرفة الحلقة 51",
+    "ep": 51,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "vphvtsJ2a4Q",
+    "title": "ينابيع المعرفة الحلقة 52",
+    "name": "ينابيع المعرفة الحلقة 52",
+    "ep": 52,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "7NmwPEHYzF4",
+    "title": "ينابيع المعرفة الحلقة 53",
+    "name": "ينابيع المعرفة الحلقة 53",
+    "ep": 53,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "Kbh7YSnDP34",
+    "title": "ينابيع المعرفة الحلقة 54",
+    "name": "ينابيع المعرفة الحلقة 54",
+    "ep": 54,
+    "last": false,
+    "dur": "12:47",
+    "sec": 767
+   },
+   {
+    "id": "VUlw_M3dT0Y",
+    "title": "ينابيع المعرفة الحلقة 55",
+    "name": "ينابيع المعرفة الحلقة 55",
+    "ep": 55,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "VElpnDcIdyY",
+    "title": "ينابيع المعرفة الحلقة 56",
+    "name": "ينابيع المعرفة الحلقة 56",
+    "ep": 56,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "UIvgqXXAn6s",
+    "title": "ينابيع المعرفة الحلقة 57",
+    "name": "ينابيع المعرفة الحلقة 57",
+    "ep": 57,
+    "last": false,
+    "dur": "12:38",
+    "sec": 758
+   },
+   {
+    "id": "pmqMOvKu_kU",
+    "title": "ينابيع المعرفة الحلقة 58",
+    "name": "ينابيع المعرفة الحلقة 58",
+    "ep": 58,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "1KqsyFCIkmk",
+    "title": "ينابيع المعرفة الحلقة 59",
+    "name": "ينابيع المعرفة الحلقة 59",
+    "ep": 59,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "mu17F_QQSoI",
+    "title": "ينابيع المعرفة الحلقة 60",
+    "name": "ينابيع المعرفة الحلقة 60",
+    "ep": 60,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "sRmlN5CLLt4",
+    "title": "ينابيع المعرفة الحلقة 61",
+    "name": "ينابيع المعرفة الحلقة 61",
+    "ep": 61,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "owBeJIb_gEU",
+    "title": "ينابيع المعرفة الحلقة 62",
+    "name": "ينابيع المعرفة الحلقة 62",
+    "ep": 62,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "lXPZVW3QmxU",
+    "title": "ينابيع المعرفة الحلقة 64",
+    "name": "ينابيع المعرفة الحلقة 64",
+    "ep": 64,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "JTzarCkmy30",
+    "title": "ينابيع المعرفة الحلقة 65",
+    "name": "ينابيع المعرفة الحلقة 65",
+    "ep": 65,
+    "last": false,
+    "dur": "12:44",
+    "sec": 764
+   },
+   {
+    "id": "Clrnhi3-Z50",
+    "title": "ينابيع المعرفة الحلقة 66",
+    "name": "ينابيع المعرفة الحلقة 66",
+    "ep": 66,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "zDjf2ub-KEI",
+    "title": "ينابيع المعرفة الحلقة 67",
+    "name": "ينابيع المعرفة الحلقة 67",
+    "ep": 67,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "cGQJtGWjb5E",
+    "title": "ينابيع المعرفة الحلقة 68",
+    "name": "ينابيع المعرفة الحلقة 68",
+    "ep": 68,
+    "last": false,
+    "dur": "12:45",
+    "sec": 765
+   },
+   {
+    "id": "5DGJ_73hcqo",
+    "title": "ينابيع المعرفة الحلقة 69",
+    "name": "ينابيع المعرفة الحلقة 69",
+    "ep": 69,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "RNGQ2GBi4kE",
+    "title": "ينابيع المعرفة الحلقة 70",
+    "name": "ينابيع المعرفة الحلقة 70",
+    "ep": 70,
+    "last": false,
+    "dur": "12:47",
+    "sec": 767
+   },
+   {
+    "id": "hXT-7mPRc0k",
+    "title": "ينابيع المعرفة الحلقة 71",
+    "name": "ينابيع المعرفة الحلقة 71",
+    "ep": 71,
+    "last": false,
+    "dur": "12:43",
+    "sec": 763
+   },
+   {
+    "id": "nN9G_fqkZD8",
+    "title": "ينابيع المعرفة الحلقة 72",
+    "name": "ينابيع المعرفة الحلقة 72",
+    "ep": 72,
+    "last": false,
+    "dur": "12:46",
+    "sec": 766
+   },
+   {
+    "id": "BywOlLBNK5g",
+    "title": "ينابيع المعرفة الحلقة 73 و الأخيرة",
+    "name": "ينابيع المعرفة الحلقة 73 و الأخيرة",
+    "ep": 73,
+    "last": true,
+    "dur": "12:47",
+    "sec": 767
+   }
+  ]
+ },
+ {
+  "id": "PLbwI0LE0f2MFBGuzTX6k6iZrAeDvA1S2X",
+  "title": "كان يا ما كان.. الحياة",
+  "subtitle": "سبيستون - رحلة داخل جسم الإنسان",
+  "items": [
+   {
+    "id": "-CGrx2ln-vs",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 1 | كوكب الخلية",
+    "name": "الحلقة 1 | كوكب الخلية",
+    "ep": 1,
+    "last": false,
+    "dur": "24:19",
+    "sec": 1459
+   },
+   {
+    "id": "jKwt7wgMvsk",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 2 | الولادة",
+    "name": "الحلقة 2 | الولادة",
+    "ep": 2,
+    "last": false,
+    "dur": "22:13",
+    "sec": 1333
+   },
+   {
+    "id": "tlq0ITlg6Q0",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 3 | حراس الجسم",
+    "name": "الحلقة 3 | حراس الجسم",
+    "ep": 3,
+    "last": false,
+    "dur": "26:39",
+    "sec": 1599
+   },
+   {
+    "id": "CXU9POrxFF8",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 4 | نخاع العظم",
+    "name": "الحلقة 4 | نخاع العظم",
+    "ep": 4,
+    "last": false,
+    "dur": "26:41",
+    "sec": 1601
+   },
+   {
+    "id": "sGgS8VeHCl8",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 5 | الدم",
+    "name": "الحلقة 5 | الدم",
+    "ep": 5,
+    "last": false,
+    "dur": "25:37",
+    "sec": 1537
+   },
+   {
+    "id": "QxdC4DOONjU",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 6 | صفائح الدم",
+    "name": "الحلقة 6 | صفائح الدم",
+    "ep": 6,
+    "last": false,
+    "dur": "24:04",
+    "sec": 1444
+   },
+   {
+    "id": "vZmBrpNbrzM",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 7 | القلب",
+    "name": "الحلقة 7 | القلب",
+    "ep": 7,
+    "last": false,
+    "dur": "26:13",
+    "sec": 1573
+   },
+   {
+    "id": "RMtS7Ua9g5E",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 8 | الجهاز التنفسي",
+    "name": "الحلقة 8 | الجهاز التنفسي",
+    "ep": 8,
+    "last": false,
+    "dur": "26:04",
+    "sec": 1564
+   },
+   {
+    "id": "sbTQIhyY6oM",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 9 | الدماغ",
+    "name": "الحلقة 9 | الدماغ",
+    "ep": 9,
+    "last": false,
+    "dur": "25:51",
+    "sec": 1551
+   },
+   {
+    "id": "QkFJQzMmeRU",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 10 | الخلايا العصبية",
+    "name": "الحلقة 10 | الخلايا العصبية",
+    "ep": 10,
+    "last": false,
+    "dur": "26:45",
+    "sec": 1605
+   },
+   {
+    "id": "C1BZNkOl9E4",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 11 | العين",
+    "name": "الحلقة 11 | العين",
+    "ep": 11,
+    "last": false,
+    "dur": "26:14",
+    "sec": 1574
+   },
+   {
+    "id": "67v9OmTF4oI",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 12 | الأذن",
+    "name": "الحلقة 12 | الأذن",
+    "ep": 12,
+    "last": false,
+    "dur": "26:39",
+    "sec": 1599
+   },
+   {
+    "id": "o7vljOa0B7o",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 13 | الجلد",
+    "name": "الحلقة 13 | الجلد",
+    "ep": 13,
+    "last": false,
+    "dur": "26:16",
+    "sec": 1576
+   },
+   {
+    "id": "aApaVJTGa9E",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 14 | الفم والأسنان",
+    "name": "الحلقة 14 | الفم والأسنان",
+    "ep": 14,
+    "last": false,
+    "dur": "26:55",
+    "sec": 1615
+   },
+   {
+    "id": "oIjCGIXYwOM",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 15 | الهضم",
+    "name": "الحلقة 15 | الهضم",
+    "ep": 15,
+    "last": false,
+    "dur": "26:40",
+    "sec": 1600
+   },
+   {
+    "id": "4ApsRlcY44c",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 16 | الكبد",
+    "name": "الحلقة 16 | الكبد",
+    "ep": 16,
+    "last": false,
+    "dur": "26:40",
+    "sec": 1600
+   },
+   {
+    "id": "ImrymPBE_io",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 17 | الكليتان",
+    "name": "الحلقة 17 | الكليتان",
+    "ep": 17,
+    "last": false,
+    "dur": "27:05",
+    "sec": 1625
+   },
+   {
+    "id": "BrgOAP-AlyI",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 18 | الجهاز اللمفاوي",
+    "name": "الحلقة 18 | الجهاز اللمفاوي",
+    "ep": 18,
+    "last": false,
+    "dur": "26:37",
+    "sec": 1597
+   },
+   {
+    "id": "NV1pfct6UWM",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 19 | الهيكل العظمي",
+    "name": "الحلقة 19 | الهيكل العظمي",
+    "ep": 19,
+    "last": false,
+    "dur": "26:59",
+    "sec": 1619
+   },
+   {
+    "id": "AtVbJyD-lAA",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 20 | العضلات والدهون",
+    "name": "الحلقة 20 | العضلات والدهون",
+    "ep": 20,
+    "last": false,
+    "dur": "26:33",
+    "sec": 1593
+   },
+   {
+    "id": "AEwgaP1JOAM",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 21 | حرب السموم",
+    "name": "الحلقة 21 | حرب السموم",
+    "ep": 21,
+    "last": false,
+    "dur": "26:28",
+    "sec": 1588
+   },
+   {
+    "id": "rKcKzig9XQw",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 22 | التطعيم",
+    "name": "الحلقة 22 | التطعيم",
+    "ep": 22,
+    "last": false,
+    "dur": "26:55",
+    "sec": 1615
+   },
+   {
+    "id": "j3ZSUpZLULo",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 23 | الهرمون",
+    "name": "الحلقة 23 | الهرمون",
+    "ep": 23,
+    "last": false,
+    "dur": "26:38",
+    "sec": 1598
+   },
+   {
+    "id": "WHwwcy11mI0",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 24 | سلسلة الحياة",
+    "name": "الحلقة 24 | سلسلة الحياة",
+    "ep": 24,
+    "last": false,
+    "dur": "26:33",
+    "sec": 1593
+   },
+   {
+    "id": "3oHNuM_5U9s",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 25 | المناوبات الليلية",
+    "name": "الحلقة 25 | المناوبات الليلية",
+    "ep": 25,
+    "last": false,
+    "dur": "26:30",
+    "sec": 1590
+   },
+   {
+    "id": "UwkD-JdEYlM",
+    "title": "سبيستون | كان يا ما كان الحياة | الحلقة 26 والأخيرة | وتستمر الحياة",
+    "name": "الحلقة 26 والأخيرة | وتستمر الحياة",
+    "ep": 26,
+    "last": true,
+    "dur": "27:00",
+    "sec": 1620
+   },
+   {
+    "id": "KXaA9mxJ2T8",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات الأولى",
+    "name": "مجموعة الحلقات الأولى",
+    "ep": 1,
+    "last": false,
+    "dur": "1:38:14",
+    "sec": 5894
+   },
+   {
+    "id": "9ljWX7PWqbw",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات الثانية",
+    "name": "مجموعة الحلقات الثانية",
+    "ep": 0,
+    "last": false,
+    "dur": "1:40:20",
+    "sec": 6020
+   },
+   {
+    "id": "emldqbgqMsI",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات الثالثة",
+    "name": "مجموعة الحلقات الثالثة",
+    "ep": 0,
+    "last": false,
+    "dur": "1:43:51",
+    "sec": 6231
+   },
+   {
+    "id": "X9TrUnvzbmY",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات الرابعة",
+    "name": "مجموعة الحلقات الرابعة",
+    "ep": 0,
+    "last": false,
+    "dur": "1:44:57",
+    "sec": 6297
+   },
+   {
+    "id": "QwbJrrIEAAk",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات الخامسة",
+    "name": "مجموعة الحلقات الخامسة",
+    "ep": 0,
+    "last": false,
+    "dur": "1:45:37",
+    "sec": 6337
+   },
+   {
+    "id": "McV9w8Eb9II",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات السادسة",
+    "name": "مجموعة الحلقات السادسة",
+    "ep": 0,
+    "last": false,
+    "dur": "1:18:56",
+    "sec": 4736
+   },
+   {
+    "id": "DAEc6MF1NlQ",
+    "title": "سبيستون | كان يا ما كان الحياة | مجموعة الحلقات السابعة والأخيرة",
+    "name": "مجموعة الحلقات السابعة والأخيرة",
+    "ep": 0,
+    "last": true,
+    "dur": "1:18:58",
+    "sec": 4738
+   },
+   {
+    "id": "FhVMtTmDLwg",
+    "title": "سبيستون | كان يا ما كان الحياة | أطول مارثون من الحلقات",
+    "name": "أطول مارثون من الحلقات",
+    "ep": 0,
+    "last": false,
+    "dur": "4:48:14",
+    "sec": 17294
+   },
+   {
+    "id": "jAievsZNgQY",
+    "title": "سبيستون | كان يا ما كان الحياة | رحلة الطعام من الفم إلى المعدة",
+    "name": "رحلة الطعام من الفم إلى المعدة",
+    "ep": 0,
+    "last": false,
+    "dur": "53:02",
+    "sec": 3182
+   },
+   {
+    "id": "COE3XhQC2dQ",
+    "title": "سبيستون | كان يا ما كان الحياة | جهازان مهمان في جسم الإنسان",
+    "name": "جهازان مهمان في جسم الإنسان",
+    "ep": 0,
+    "last": false,
+    "dur": "52:09",
+    "sec": 3129
+   },
+   {
+    "id": "xqIp9oHntcE",
+    "title": "سبيستون | كان يا ما كان الحياة | لكلٍ منهم مهمة في جسم الإنسان \"القلب، الكبد، الكليتان\"",
+    "name": "لكلٍ منهم مهمة في جسم الإنسان \"القلب، الكبد، الكليتان\"",
+    "ep": 0,
+    "last": false,
+    "dur": "1:18:53",
+    "sec": 4733
+   },
+   {
+    "id": "nCBi9UnatgA",
+    "title": "سبيستون | كان يا ما كان الحياة | أسرار جسم الإنسان",
+    "name": "أسرار جسم الإنسان",
+    "ep": 0,
+    "last": false,
+    "dur": "1:18:23",
+    "sec": 4703
+   },
+   {
+    "id": "CoYKLwhVMlU",
+    "title": "سبيستون | كان يا ما كان الحياة | رحلة من المعرفة داخل جسم الإنسان",
+    "name": "رحلة من المعرفة داخل جسم الإنسان",
+    "ep": 0,
+    "last": false,
+    "dur": "20:30",
+    "sec": 1230
+   },
+   {
+    "id": "DRUgahbFZ7U",
+    "title": "سبيستون | كان يا ما كان الحياة | كيف تعمل الدورة الدموية؟",
+    "name": "كيف تعمل الدورة الدموية؟",
+    "ep": 0,
+    "last": false,
+    "dur": "1:14:49",
+    "sec": 4489
+   },
+   {
+    "id": "7zc13sYgSgY",
+    "title": "سبيستون | كان يا ما كان الحياة | كيف يواجه الجسم العدوى والأمراض؟",
+    "name": "كيف يواجه الجسم العدوى والأمراض؟",
+    "ep": 0,
+    "last": false,
+    "dur": "52:00",
+    "sec": 3120
+   }
+  ]
+ }
+];
 
 </script>
 <script>
 (function () {
     'use strict';
 
-    var P = window.PLAYLIST;
-    var items = P.items.map(function (it, i) {
-        var m = it.title.match(/\d+/);
-        var ep = m ? parseInt(m[0], 10) : (/الأولى/.test(it.title) ? 1 : i + 1);
-        return { id: it.id, title: it.title, dur: it.dur, sec: it.sec, ep: ep, last: /الأخيرة/.test(it.title) };
-    });
+    var LIB = window.LIBRARY, P = null, items = [], inHome = true;
+    function prep(list) {
+        return list.map(function (it) {
+            var sub = (it.name || it.title).replace(/^ينابيع المعرفة\s*/, '').replace(/^الحلقة\s*(\d+|الأولى)\s*(و\s*الأخيرة)?\s*\|?\s*/, '').trim();
+            return { id: it.id, title: it.title, sub: sub, dur: it.dur, sec: it.sec, ep: it.ep, last: it.last };
+        });
+    }
     var $ = function (id) { return document.getElementById(id); };
     var KEY = 'yanabea.v1';
 
     /* ---------- persisted state ---------- */
-    var S = { last: null, prog: {}, auto: true, rate: 1, desc: false, muted: false };
+    var S = { lastBy: {}, prog: {}, auto: true, rate: 1, desc: false, muted: false };
     try { var raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
     function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
@@ -705,15 +1313,14 @@ window.PLAYLIST = {
         return (h ? h + ':' + (m < 10 ? '0' : '') : '') + m + ':' + (x < 10 ? '0' : '') + x;
     }
     function indexOfId(id) { for (var i = 0; i < items.length; i++) if (items[i].id === id) return i; return -1; }
-    function epLabel(it) { return it.last ? 'الحلقة ' + it.ep + ' (الأخيرة)' : 'الحلقة ' + it.ep; }
+    function epLabel(it) { return it.ep ? (it.last ? 'الحلقة ' + it.ep + ' (الأخيرة)' : 'الحلقة ' + it.ep) : 'فيديو'; }
+    function shown(it) { return it.sub || (P ? P.title : it.title); }
     function thumb(id, q) { return 'https://i.ytimg.com/vi/' + id + '/' + (q || 'mqdefault') + '.jpg'; }
     var toastT;
     function toast(t) { var e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { e.classList.remove('on'); }, 1800); }
     function isDone(id) { var p = S.prog[id]; return !!(p && p.done); }
 
     /* ---------- header / list ---------- */
-    $('plTitle').textContent = P.title;
-    $('plSub').textContent = P.subtitle + ' • ' + items.length + ' حلقة';
 
     function updateOverall() {
         var n = items.filter(function (i) { return isDone(i.id); }).length;
@@ -745,7 +1352,7 @@ window.PLAYLIST = {
             html += '<button class="row-item f' + (i === cur ? ' cur' : '') + (isDone(it.id) ? ' done' : '') + '" data-i="' + i + '" role="listitem">' +
                 '<div class="th"><img loading="lazy" src="' + thumb(it.id) + '" alt=""/><em>' + it.dur + '</em>' +
                 (pct ? '<div class="pg"><i style="width:' + pct + '%"></i></div>' : '') + '</div>' +
-                '<div class="meta"><div class="n">' + epLabel(it) + '</div><div class="t">' + it.title + '</div></div>' +
+                '<div class="meta"><div class="n">' + epLabel(it) + '</div><div class="t">' + shown(it) + '</div></div>' +
                 '<div class="eq"><i></i><i></i><i></i></div><div class="check">' + CHECK + '</div></button>';
         });
         list.innerHTML = html;
@@ -781,15 +1388,15 @@ window.PLAYLIST = {
         cur = i;
         var it = items[i], p = S.prog[it.id];
         var start = p && !p.done && p.t > 5 && p.d && p.t < p.d - 10 ? Math.floor(p.t) : 0;
-        S.last = it.id; save();
+        S.lastBy[P.id] = it.id; save();
         clearTimeout(upTimer); clearTimeout(errTimer);
         $('upnext').hidden = true; $('err').hidden = true;
         $('posterImg').src = thumb(it.id, 'maxresdefault');
         $('posterImg').onerror = function () { this.onerror = null; this.src = thumb(it.id, 'hqdefault'); };
         $('poster').classList.remove('gone');
-        $('nowTitle').textContent = it.title;
+        $('nowTitle').textContent = shown(it);
         $('epBadge').textContent = epLabel(it);
-        $('ovTitle').textContent = it.title;
+        $('ovTitle').textContent = P.title + ' - ' + shown(it);
         $('nowMeta').textContent = 'المدة ' + it.dur + (start ? ' • تابع من ' + fmt(start) : '') + ' • ' + (i + 1) + ' من ' + items.length;
         $('fill').style.width = '0'; $('knob').style.left = '0'; $('buf').style.width = '0';
         $('cur').textContent = fmt(start); $('dur').textContent = it.dur;
@@ -831,7 +1438,7 @@ window.PLAYLIST = {
 
     function showUpNext() {
         var n = items[cur + 1], c = 6;
-        $('upImg').src = thumb(n.id, 'mqdefault'); $('upTitle').textContent = n.title;
+        $('upImg').src = thumb(n.id, 'mqdefault'); $('upTitle').textContent = shown(n);
         $('upnext').hidden = false; $('upCount').textContent = c;
         setTimeout(function () { $('upNow').focus(); }, 0);
         (function step() {
@@ -884,7 +1491,7 @@ window.PLAYLIST = {
     /* ---------- actions ---------- */
     function isPlaying() { return ready && yt.getPlayerState() === YT.PlayerState.PLAYING; }
     function toggle() {
-        if (!ready) { return; }
+        if (!ready || inHome) { return; }
         if (!$('upnext').hidden) { return; }
         var s = yt.getPlayerState();
         if (s === YT.PlayerState.PLAYING || s === YT.PlayerState.BUFFERING) yt.pauseVideo();
@@ -913,7 +1520,7 @@ window.PLAYLIST = {
         showUi(); setTimeout(function () { $('bPlay').focus(); }, 0);
     }
     function resume() {
-        var i = S.last ? indexOfId(S.last) : -1;
+        var i = S.lastBy[P.id] ? indexOfId(S.lastBy[P.id]) : -1;
         if (i < 0) i = 0;
         if (i !== cur) load(i, true); else toggle();
     }
@@ -1016,6 +1623,7 @@ window.PLAYLIST = {
             if (!$('upnext').hidden) return cancelUpNext();
             if (typing) { $('q').blur(); return $('resumeBtn').focus(); }
             if (inTheater) return theater(false);
+            if (!inHome) return goHome();
             return exitApp();
         }
         // Media keys
@@ -1036,6 +1644,7 @@ window.PLAYLIST = {
             return navigate(dir);
         }
         if (k === 13) {
+            if (inHome) return;
             var a = document.activeElement;
             if (inTheater && uiHidden()) { e.preventDefault(); showUi(); return toggle(); }
             if (!a || a === document.body) { e.preventDefault(); return toggle(); }
@@ -1053,11 +1662,56 @@ window.PLAYLIST = {
         else if (c === 'l') seekBy(10);
     });
 
+    /* ---------- home / series ---------- */
+    function renderHome() {
+        var html = '';
+        LIB.forEach(function (pl, i) {
+            var n = pl.items.filter(function (x) { return isDone(x.id); }).length, pct = pl.items.length ? n / pl.items.length * 100 : 0;
+            html += '<button class="series f" data-s="' + i + '"><div class="im"><img src="' + thumb(pl.items[0].id, 'mqdefault') + '" alt=""/></div>' +
+                '<div class="sb"><h3>' + pl.title + '</h3><p>' + pl.subtitle + '</p>' +
+                '<div class="cnt">' + pl.items.length + ' حلقة' + (n ? ' • شاهدت ' + n : '') + '</div>' +
+                '<div class="mini"><i style="width:' + pct + '%"></i></div></div></button>';
+        });
+        $('shelf').innerHTML = html;
+    }
+    function enter(idx) {
+        P = LIB[idx]; items = prep(P.items); inHome = false;
+        document.body.classList.remove('home');
+        filter = 'all'; query = ''; $('q').value = '';
+        document.querySelectorAll('[data-filter]').forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-filter') === 'all'); });
+        $('plTitle').textContent = P.title;
+        $('plSub').textContent = P.subtitle + ' • ' + items.length + ' حلقة';
+        updateOverall(); renderList();
+        var st = S.lastBy[P.id] ? indexOfId(S.lastBy[P.id]) : 0;
+        load(st < 0 ? 0 : st, false);
+        setTimeout(function () { $('bigPlay').focus(); }, 100);
+    }
+    function goHome() {
+        saveProgress();
+        clearTimeout(upTimer); clearTimeout(errTimer);
+        $('upnext').hidden = true; $('err').hidden = true;
+        try { if (ready) yt.stopVideo(); } catch (e) {}
+        var back = P ? LIB.indexOf(P) : 0;
+        inHome = true; cur = -1;
+        document.body.classList.remove('theater');
+        document.body.classList.add('home');
+        $('plTitle').textContent = 'أفلام كرتون'; $('plSub').textContent = 'اختر المسلسل الذي تريد مشاهدته';
+        document.title = 'أفلام كرتون';
+        renderHome();
+        var c = document.querySelector('[data-s="' + back + '"]'); if (c) c.focus();
+    }
+    $('shelf').addEventListener('click', function (e) {
+        var b = e.target; while (b && b !== this && !b.getAttribute('data-s')) b = b.parentNode;
+        if (b && b.getAttribute('data-s') !== null) enter(+b.getAttribute('data-s'));
+    });
+    $('homeBtn').addEventListener('click', goHome);
+
     /* ---------- init ---------- */
-    syncChips(); updateOverall(); renderList();
-    var start = S.last ? indexOfId(S.last) : 0;
-    load(start < 0 ? 0 : start, false);
-    setTimeout(function () { var b = $('bigPlay'); if (b && !b.classList.contains('hide')) b.focus(); }, 300);
+    syncChips();
+    document.body.classList.add('home');
+    $('plTitle').textContent = 'أفلام كرتون'; $('plSub').textContent = 'اختر المسلسل الذي تريد مشاهدته';
+    renderHome();
+    setTimeout(function () { var c = document.querySelector('.series'); if (c) c.focus(); }, 300);
 })();
 
 </script>
