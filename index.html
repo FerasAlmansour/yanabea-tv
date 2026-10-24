@@ -1749,6 +1749,7 @@ window.LIBRARY = [
  },
  {
   "id": "kirza",
+  "cover": "img/kirza.jpg",
   "title": "كرزة",
   "subtitle": "فيديوهات كرزة - تُضاف باستمرار",
   "remote": "https://ferasalmansour.github.io/yanabea-data/kirza.json",
@@ -1877,8 +1878,8 @@ window.LIBRARY = [
         renderList(); scrollToCur(); setPlayingUi(false);
         $('bigPlay').classList.remove('hide');
         if (!ready) { pending = { i: i, autoplay: autoplay }; return; }
-        if (autoplay) { $('spinner').classList.add('on'); yt.loadVideoById({ videoId: it.id, startSeconds: start }); }
-        else yt.cueVideoById({ videoId: it.id, startSeconds: start });
+        if (autoplay) { $('spinner').classList.add('on'); yt.loadVideoById(it.id, start); }
+        else yt.cueVideoById(it.id, start);
         try { yt.setPlaybackRate(S.rate); } catch (e) {}
     }
 
@@ -1928,6 +1929,7 @@ window.LIBRARY = [
         if (code === 100 || code === 101 || code === 150) { msg = 'هذه الحلقة غير متاحة حالياً على يوتيوب.'; skip = true; }
         else if (code === 153 || code === 152) { msg = 'يوتيوب رفض التشغيل داخل التطبيق (خطأ ' + code + '). تأكد من اتصال الإنترنت ثم أعد المحاولة.'; }
         else msg = 'حدث خطأ أثناء تشغيل الفيديو (رمز ' + code + ').';
+        msg += ' [' + (items[cur] ? items[cur].id : '') + ' ' + ((navigator.userAgent.match(/(Chrome|Tizen)[\/ ][\d.]+/g) || []).join(' ')) + ']';
         $('spinner').classList.remove('on');
         $('errTitle').textContent = 'تعذّر تشغيل الحلقة';
         $('errMsg').textContent = msg + (skip && cur < items.length - 1 ? ' سيتم الانتقال للحلقة التالية.' : '');
@@ -2140,7 +2142,7 @@ window.LIBRARY = [
         var html = '';
         LIB.forEach(function (pl, i) {
             var n = pl.items.filter(function (x) { return isDone(x.id); }).length, pct = pl.items.length ? n / pl.items.length * 100 : 0;
-            var cover = pl.items.length ? thumb(pl.items[0].id, 'mqdefault') : (document.getElementById('logo').getElementsByTagName('img')[0].src);
+            var cover = pl.cover ? pl.cover : pl.items.length ? thumb(pl.items[0].id, 'mqdefault') : (document.getElementById('logo').getElementsByTagName('img')[0].src);
             html += '<button class="series f" data-s="' + i + '"><div class="im"><img src="' + cover + '" alt=""/></div>' +
                 '<div class="sb"><h3>' + pl.title + '</h3><p>' + pl.subtitle + '</p>' +
                 '<div class="cnt">' + (pl.remote && !pl.loaded ? 'جارٍ التحميل...' : pl.items.length + (pl.remote ? ' فيديو' : ' حلقة')) + (n ? ' • شاهدت ' + n : '') + '</div>' +
