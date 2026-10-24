@@ -1751,7 +1751,7 @@ window.LIBRARY = [
   "id": "kirza",
   "title": "كرزة",
   "subtitle": "فيديوهات كرزة - تُضاف باستمرار",
-  "remote": "kirza.json",
+  "remote": "https://ferasalmansour.github.io/yanabea-data/kirza.json",
   "items": []
  }
 ];
@@ -2192,8 +2192,9 @@ window.LIBRARY = [
                 if (x.readyState !== 4) return;
                 try {
                     var d = JSON.parse(x.responseText);
-                    pl.items = (d.items || []).map(function (v) {
-                        return { id: v.id, title: v.title, name: v.title, ep: 0, last: false, dur: v.dur || '', sec: v.sec || 0 };
+                    pl.items = (d.items || []).filter(function (v) { return v && /^[A-Za-z0-9_-]{11}$/.test(v.id); }).map(function (v) {
+                        var t = String(v.title || v.id).replace(/[<>&"]/g, '');
+                        return { id: v.id, title: t, name: t, ep: 0, last: false, dur: '', sec: 0 };
                     });
                     pl.loaded = true;
                 } catch (e) { pl.items = []; pl.loaded = true; }
