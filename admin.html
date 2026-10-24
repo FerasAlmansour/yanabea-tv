@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex"/>
+<title>إدارة كرزة</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#070b16;color:#eef2ff;font-family:"Segoe UI","Noto Sans Arabic",Tahoma,Arial,sans-serif;min-height:100vh;padding:20px 16px 60px}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:26px;margin-bottom:4px}
+.sub{color:#93a0c4;font-size:14px;margin-bottom:20px}
+.card{background:#101830;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px;margin-bottom:16px}
+label{display:block;font-size:14px;color:#93a0c4;margin-bottom:6px}
+input[type=text],input[type=password]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#eef2ff;font:inherit;font-size:16px;outline:none}
+input:focus{border-color:#2dd4bf}
+.row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:11px 18px;font-weight:700;font-size:15px}
+.pri{background:#2dd4bf;color:#04121a}
+.sec{background:rgba(255,255,255,.12);color:#eef2ff;font-weight:600}
+.dan{background:rgba(251,113,133,.18);color:#fb7185}
+button:disabled{opacity:.5;cursor:default}
+.msg{margin-top:10px;font-size:14px;min-height:20px}
+.ok{color:#2dd4bf}.bad{color:#fb7185}
+.prev{display:flex;gap:12px;margin-top:12px;align-items:center}
+.prev img{width:160px;border-radius:10px;flex:none}
+.prev b{font-size:16px;line-height:1.5}
+.item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:12px;background:rgba(255,255,255,.04);margin-bottom:8px}
+.item img{width:96px;border-radius:8px;flex:none}
+.item .t{flex:1;font-size:15px;line-height:1.4;min-width:0}
+.item .t small{display:block;color:#93a0c4;font-size:12px}
+.item button{padding:6px 10px;font-size:14px}
+.hide{display:none}
+.note{color:#93a0c4;font-size:13px;line-height:1.7}
+a{color:#2dd4bf}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>إدارة فيديوهات كرزة</h1>
+  <p class="sub">الصق رابط الفيديو وسيظهر في التلفاز خلال دقيقة تقريباً.</p>
+
+  <div class="card" id="loginCard">
+    <label for="key">مفتاح الدخول (كلمة السر)</label>
+    <input type="password" id="key" placeholder="github_pat_..." autocomplete="off"/>
+    <div class="row">
+      <button class="pri" id="login">دخول</button>
+    </div>
+    <div class="msg" id="loginMsg"></div>
+    <p class="note" style="margin-top:10px">المفتاح محفوظ على هذا الجهاز فقط ولا يُرسل إلا إلى GitHub. من لا يملكه لا يستطيع التعديل.</p>
+  </div>
+
+  <div id="panel" class="hide">
+    <div class="card">
+      <label for="url">رابط الفيديو (يوتيوب)</label>
+      <input type="text" id="url" placeholder="https://www.youtube.com/watch?v=..." dir="ltr" autocomplete="off"/>
+      <div class="prev hide" id="prev"><img id="pimg" alt=""/><div><b id="ptitle"></b></div></div>
+      <div id="titleRow" class="hide" style="margin-top:10px">
+        <label for="title">العنوان (يمكنك تعديله)</label>
+        <input type="text" id="title"/>
+      </div>
+      <div class="row">
+        <button class="pri" id="add" disabled>إضافة الفيديو</button>
+        <button class="sec" id="logout">خروج</button>
+      </div>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <div class="card">
+      <label>الفيديوهات الحالية (<span id="cnt">0</span>)</label>
+      <div id="list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var OWNER = 'FerasAlmansour', REPO = 'yanabea-tv', FILE = 'kirza.json', BRANCH = 'main';
+  var API = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + FILE;
+  function $(id) { return document.getElementById(id); }
+  var token = '', sha = null, data = { items: [] }, pending = null;
+
+  function say(el, text, cls) { el.textContent = text; el.className = 'msg ' + (cls || ''); }
+  function b64enc(s) { return btoa(unescape(encodeURIComponent(s))); }
+  function b64dec(s) { return decodeURIComponent(escape(atob(s.replace(/\n/g, '')))); }
+  function gh(method, body) {
+    return fetch(API + (method === 'GET' ? '?ref=' + BRANCH + '&t=' + Date.now() : ''), {
+      method: method,
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined
+    });
+  }
+
+  function load() {
+    return gh('GET').then(function (r) {
+      if (r.status === 404) { sha = null; data = { items: [] }; return; }
+      if (r.status === 401 || r.status === 403) throw new Error('auth');
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json().then(function (j) { sha = j.sha; data = JSON.parse(b64dec(j.content)); if (!data.items) data.items = []; });
+    });
+  }
+  function save(note) {
+    var body = { message: note, content: b64enc(JSON.stringify(data, null, 1) + '\n'), branch: BRANCH };
+    if (sha) body.sha = sha;
+    return gh('PUT', body).then(function (r) {
+      if (r.status === 409 || r.status === 422) throw new Error('conflict');
+      if (r.status === 401 || r.status === 403) throw new Error('auth');
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json().then(function (j) { sha = j.content.sha; });
+    });
+  }
+
+  function videoId(u) {
+    u = (u || '').trim();
+    var m = u.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/);
+    if (m) return m[1];
+    return /^[A-Za-z0-9_-]{11}$/.test(u) ? u : null;
+  }
+
+  function render() {
+    $('cnt').textContent = data.items.length;
+    var h = '';
+    data.items.forEach(function (v, i) {
+      h += '<div class="item"><img src="https://i.ytimg.com/vi/' + v.id + '/mqdefault.jpg" alt=""/>' +
+        '<div class="t">' + esc(v.title) + '<small>' + v.id + '</small></div>' +
+        '<button class="sec" data-up="' + i + '"' + (i === 0 ? ' disabled' : '') + '>▲</button>' +
+        '<button class="sec" data-dn="' + i + '"' + (i === data.items.length - 1 ? ' disabled' : '') + '>▼</button>' +
+        '<button class="dan" data-del="' + i + '">حذف</button></div>';
+    });
+    $('list').innerHTML = h || '<p class="note">لا توجد فيديوهات بعد.</p>';
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function enter() {
+    $('loginCard').classList.add('hide'); $('panel').classList.remove('hide'); render();
+  }
+  function login(t, silent) {
+    token = t.trim();
+    if (!token) return;
+    say($('loginMsg'), 'جارٍ التحقق...', '');
+    load().then(function () {
+      try { localStorage.setItem('kirza.key', token); } catch (e) {}
+      enter();
+    }).catch(function (e) {
+      token = '';
+      try { localStorage.removeItem('kirza.key'); } catch (x) {}
+      if (!silent) say($('loginMsg'), e.message === 'auth' ? 'المفتاح غير صحيح أو لا يملك صلاحية التعديل.' : 'تعذر الاتصال: ' + e.message, 'bad');
+    });
+  }
+  $('login').onclick = function () { login($('key').value); };
+  $('key').onkeydown = function (e) { if (e.keyCode === 13) login($('key').value); };
+  $('logout').onclick = function () { try { localStorage.removeItem('kirza.key'); } catch (e) {} location.reload(); };
+
+  // link -> preview
+  var t0;
+  $('url').oninput = function () {
+    clearTimeout(t0); pending = null; $('add').disabled = true; $('prev').classList.add('hide'); $('titleRow').classList.add('hide'); say($('msg'), '', '');
+    var v = this.value;
+    t0 = setTimeout(function () {
+      var id = videoId(v);
+      if (!v.trim()) return;
+      if (!id) { say($('msg'), 'الرابط غير صالح.', 'bad'); return; }
+      if (data.items.some(function (x) { return x.id === id; })) { say($('msg'), 'هذا الفيديو مضاف مسبقاً.', 'bad'); return; }
+      say($('msg'), 'جارٍ جلب العنوان...', '');
+      fetch('https://www.youtube.com/oembed?format=json&url=' + encodeURIComponent('https://www.youtube.com/watch?v=' + id))
+        .then(function (r) { if (!r.ok) throw new Error('x'); return r.json(); })
+        .then(function (j) { done(id, j.title); })
+        .catch(function () { done(id, ''); say($('msg'), 'لم أستطع جلب العنوان تلقائياً، اكتبه بنفسك.', 'bad'); });
+    }, 400);
+  };
+  function done(id, title) {
+    pending = id;
+    $('pimg').src = 'https://i.ytimg.com/vi/' + id + '/mqdefault.jpg';
+    $('ptitle').textContent = title || id;
+    $('title').value = title;
+    $('prev').classList.remove('hide'); $('titleRow').classList.remove('hide');
+    $('add').disabled = false;
+    if (title) say($('msg'), '', '');
+  }
+
+  function commit(note, okText) {
+    $('add').disabled = true;
+    say($('msg'), 'جارٍ الحفظ...', '');
+    return save(note).then(function () { say($('msg'), okText + ' سيظهر في التلفاز خلال دقيقة تقريباً.', 'ok'); render(); })
+      .catch(function (e) {
+        // reload latest copy so nothing is overwritten silently
+        say($('msg'), e.message === 'conflict' ? 'تغيّرت القائمة أثناء الحفظ، أعد المحاولة.' : (e.message === 'auth' ? 'المفتاح لا يملك صلاحية التعديل.' : 'فشل الحفظ: ' + e.message), 'bad');
+        return load().then(render);
+      });
+  }
+
+  $('add').onclick = function () {
+    if (!pending) return;
+    var title = $('title').value.trim() || pending;
+    data.items.push({ id: pending, title: title, added: new Date().toISOString().slice(0, 10) });
+    commit('Add video ' + pending, 'تمت الإضافة.').then(function () {
+      $('url').value = ''; pending = null; $('prev').classList.add('hide'); $('titleRow').classList.add('hide'); $('add').disabled = true;
+    });
+  };
+  $('list').onclick = function (e) {
+    var b = e.target, i;
+    if ((i = b.getAttribute('data-del')) !== null) {
+      i = +i;
+      if (!confirm('حذف هذا الفيديو من القائمة؟')) return;
+      var v = data.items.splice(i, 1)[0];
+      commit('Remove video ' + v.id, 'تم الحذف.');
+    } else if ((i = b.getAttribute('data-up')) !== null) {
+      i = +i; data.items.splice(i - 1, 0, data.items.splice(i, 1)[0]); commit('Reorder videos', 'تم تغيير الترتيب.');
+    } else if ((i = b.getAttribute('data-dn')) !== null) {
+      i = +i; data.items.splice(i + 1, 0, data.items.splice(i, 1)[0]); commit('Reorder videos', 'تم تغيير الترتيب.');
+    }
+  };
+
+  var saved = ''; try { saved = localStorage.getItem('kirza.key') || ''; } catch (e) {}
+  if (saved) login(saved, true);
+})();
+</script>
+</body>
+</html>

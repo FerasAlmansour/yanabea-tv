@@ -1746,6 +1746,13 @@ window.LIBRARY = [
     "sec": 976
    }
   ]
+ },
+ {
+  "id": "kirza",
+  "title": "كرزة",
+  "subtitle": "فيديوهات كرزة - تُضاف باستمرار",
+  "remote": "kirza.json",
+  "items": []
  }
 ];
 
@@ -1816,7 +1823,7 @@ window.LIBRARY = [
         arr.forEach(function (i) {
             var it = items[i], p = S.prog[it.id], pct = p && !p.done && p.d ? Math.min(100, p.t / p.d * 100) : 0;
             html += '<button class="row-item f' + (i === cur ? ' cur' : '') + (isDone(it.id) ? ' done' : '') + '" data-i="' + i + '" role="listitem">' +
-                '<div class="th"><img loading="lazy" src="' + thumb(it.id) + '" alt=""/><em>' + it.dur + '</em>' +
+                '<div class="th"><img loading="lazy" src="' + thumb(it.id) + '" alt=""/>' + (it.dur ? '<em>' + it.dur + '</em>' : '') +
                 (pct ? '<div class="pg"><i style="width:' + pct + '%"></i></div>' : '') + '</div>' +
                 '<div class="meta"><div class="n">' + epLabel(it) + '</div><div class="t">' + shown(it) + '</div></div>' +
                 '<div class="eq"><i></i><i></i><i></i></div><div class="check">' + CHECK + '</div></button>';
@@ -1863,7 +1870,7 @@ window.LIBRARY = [
         $('nowTitle').textContent = shown(it);
         $('epBadge').textContent = epLabel(it);
         $('ovTitle').textContent = P.title + ' - ' + shown(it);
-        $('nowMeta').textContent = 'المدة ' + it.dur + (start ? ' • تابع من ' + fmt(start) : '') + ' • ' + (i + 1) + ' من ' + items.length;
+        $('nowMeta').textContent = (it.dur ? 'المدة ' + it.dur + ' • ' : '') + (start ? 'تابع من ' + fmt(start) + ' • ' : '') + (i + 1) + ' من ' + items.length;
         $('fill').style.width = '0'; $('knob').style.left = '0'; $('buf').style.width = '0';
         $('cur').textContent = fmt(start); $('dur').textContent = it.dur;
         document.title = it.title;
@@ -2133,14 +2140,17 @@ window.LIBRARY = [
         var html = '';
         LIB.forEach(function (pl, i) {
             var n = pl.items.filter(function (x) { return isDone(x.id); }).length, pct = pl.items.length ? n / pl.items.length * 100 : 0;
-            html += '<button class="series f" data-s="' + i + '"><div class="im"><img src="' + thumb(pl.items[0].id, 'mqdefault') + '" alt=""/></div>' +
+            var cover = pl.items.length ? thumb(pl.items[0].id, 'mqdefault') : (document.getElementById('logo').getElementsByTagName('img')[0].src);
+            html += '<button class="series f" data-s="' + i + '"><div class="im"><img src="' + cover + '" alt=""/></div>' +
                 '<div class="sb"><h3>' + pl.title + '</h3><p>' + pl.subtitle + '</p>' +
-                '<div class="cnt">' + pl.items.length + ' حلقة' + (n ? ' • شاهدت ' + n : '') + '</div>' +
+                '<div class="cnt">' + (pl.remote && !pl.loaded ? 'جارٍ التحميل...' : pl.items.length + (pl.remote ? ' فيديو' : ' حلقة')) + (n ? ' • شاهدت ' + n : '') + '</div>' +
                 '<div class="mini"><i style="width:' + pct + '%"></i></div></div></button>';
         });
         $('shelf').innerHTML = html;
     }
     function enter(idx) {
+        if (LIB[idx].remote && !LIB[idx].loaded) { toast('جارٍ تحميل القائمة، حاول بعد لحظات'); return; }
+        if (!LIB[idx].items.length) { toast('لا توجد فيديوهات بعد'); return; }
         P = LIB[idx]; items = prep(P.items); inHome = false;
         document.body.classList.remove('home');
         filter = 'all'; query = ''; $('q').value = '';
@@ -2172,11 +2182,33 @@ window.LIBRARY = [
     });
     $('homeBtn').addEventListener('click', goHome);
 
+    /* ---------- remote series (managed from admin.html) ---------- */
+    function loadRemote() {
+        LIB.forEach(function (pl) {
+            if (!pl.remote) return;
+            var x = new XMLHttpRequest();
+            x.open('GET', pl.remote + '?t=' + Date.now(), true);
+            x.onreadystatechange = function () {
+                if (x.readyState !== 4) return;
+                try {
+                    var d = JSON.parse(x.responseText);
+                    pl.items = (d.items || []).map(function (v) {
+                        return { id: v.id, title: v.title, name: v.title, ep: 0, last: false, dur: v.dur || '', sec: v.sec || 0 };
+                    });
+                    pl.loaded = true;
+                } catch (e) { pl.items = []; pl.loaded = true; }
+                if (inHome) { var f = document.activeElement && document.activeElement.getAttribute('data-s'); renderHome(); var c = document.querySelector('[data-s="' + (f || 0) + '"]'); if (c && f !== null) c.focus(); }
+            };
+            x.send();
+        });
+    }
+
     /* ---------- init ---------- */
     syncChips();
     document.body.classList.add('home');
     $('plTitle').textContent = 'أفلام كرتون'; $('plSub').textContent = 'اختر المسلسل الذي تريد مشاهدته';
     renderHome();
+    loadRemote();
     setTimeout(function () { var c = document.querySelector('.series'); if (c) c.focus(); }, 300);
 })();
 
