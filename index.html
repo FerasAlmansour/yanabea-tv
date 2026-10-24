@@ -59,7 +59,7 @@ svg{width:1.6rem;height:1.6rem;fill:currentColor;flex:none}
 #box:not(.ui-show) #overlay{opacity:0;pointer-events:none}
 #box:not(.ui-show){cursor:none}
 #ovTitle{font-size:1.25rem;font-weight:700;text-shadow:0 1px 6px #000}
-#seek{position:relative;height:.5rem;margin:1.2rem .2rem .8rem;border-radius:1rem;background:rgba(255,255,255,.22);cursor:pointer}
+#seek{position:relative;height:.7rem;margin:.8rem .2rem 1.1rem;transition:height .15s;border-radius:1rem;background:rgba(255,255,255,.22);cursor:pointer}
 #seek::before{content:"";position:absolute;top:-.8rem;bottom:-.8rem;left:0;right:0}
 #buf,#fill{position:absolute;top:0;left:0;height:100%;border-radius:1rem;width:0}
 #buf{background:rgba(255,255,255,.28)}
@@ -68,25 +68,34 @@ svg{width:1.6rem;height:1.6rem;fill:currentColor;flex:none}
 #seek:focus #knob,#seek:hover #knob{transform:scale(1.35)}
 #bar{display:flex;justify-content:space-between;align-items:center}
 .grp{display:flex;align-items:center}
-.grp > * + *{margin-right:.4rem}
-.ib{min-width:2.9rem;height:2.9rem;padding:0 .5rem;border-radius:.9rem;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s}
-.ib span{font-size:.7rem;font-weight:700}
-.ib.big{width:3.4rem;height:3.4rem;background:rgba(255,255,255,.14);border-radius:50%}
+.grp > * + *{margin-right:.6rem}
+.ib{min-width:3.9rem;height:3.9rem;padding:0 .6rem;border-radius:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s}
+.ib svg{width:2.1rem;height:2.1rem}
+.ib span{font-size:.85rem;font-weight:700}
+.ib.big{width:4.8rem;height:4.8rem;background:rgba(255,255,255,.14);border-radius:50%}
 .ib:hover{background:rgba(255,255,255,.14)}
 #time{font-size:1rem;color:#dbe4ff;margin:0 .8rem}
-.chip{padding:.45rem 1rem;border-radius:2rem;background:rgba(255,255,255,.1);font-size:.95rem;color:#dbe4ff;transition:background .15s,transform .15s;white-space:nowrap}
+.chip{padding:.7rem 1.3rem;border-radius:2rem;background:rgba(255,255,255,.1);font-size:1.15rem;color:#dbe4ff;transition:background .15s,transform .15s;white-space:nowrap}
 .chip.on{background:#2dd4bf;color:#04121a;font-weight:700}
 .chip:hover{background:rgba(255,255,255,.2)}
 .chip.on:hover{background:#2dd4bf}
 .btn{padding:.7rem 1.5rem;border-radius:.9rem;background:#2dd4bf;color:#04121a;font-weight:800;font-size:1.05rem}
 .btn.ghost{background:rgba(255,255,255,.14);color:#eef2ff;font-weight:600;margin-right:.7rem}
 
-/* focus */
+/* focus: one loud, consistent look - bright fill + white ring + glow */
+#hint{min-height:1.9rem;font-size:1.3rem;font-weight:800;color:#fbbf24;text-shadow:0 1px 6px #000}
 .f:focus{outline:none}
-body.kbd .f:focus{box-shadow:0 0 0 .22rem #fbbf24,0 0 1.4rem rgba(251,191,36,.45);transform:scale(1.05);z-index:3}
-body.kbd #seek:focus{box-shadow:0 0 0 .2rem #fbbf24;transform:none}
-body.kbd .row-item:focus{transform:scale(1.015)}
-body.kbd #bigPlay:focus{transform:scale(1.1)}
+body.kbd .f{transition:background .12s,color .12s,transform .12s,box-shadow .12s}
+body.kbd .f:focus{box-shadow:0 0 0 .22rem #fff,0 0 0 .5rem #f59e0b,0 0 1.8rem rgba(251,191,36,.7);transform:scale(1.12);z-index:3}
+body.kbd .ib:focus,body.kbd .chip:focus,body.kbd .btn:focus,body.kbd .btn.ghost:focus{background:#fbbf24;color:#04121a}
+body.kbd #seek:focus{height:1rem;box-shadow:0 0 0 .22rem #fff,0 0 0 .45rem #f59e0b,0 0 1.4rem rgba(251,191,36,.6);transform:none}
+body.kbd #seek:focus #knob{transform:scale(1.7);background:#fbbf24}
+body.kbd .row-item:focus{transform:scale(1.03);background:rgba(251,191,36,.22);border-color:#fbbf24}
+body.kbd #q:focus{background:rgba(255,255,255,.16);transform:none}
+body.kbd #bigPlay:focus{background:#fbbf24;transform:scale(1.15)}
+/* "can't go further" pulse */
+@keyframes bump{40%{box-shadow:0 0 0 .22rem #fff,0 0 0 .7rem #fb7185,0 0 1.8rem rgba(251,113,133,.8)}}
+.bump{animation:bump .4s}
 
 /* error + upnext */
 #err{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(5,8,18,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;z-index:5}
@@ -114,10 +123,10 @@ body.kbd #bigPlay:focus{transform:scale(1.1)}
 #q::placeholder{color:var(--mut)}
 #chips{display:flex;flex-wrap:wrap}
 #chips .chip{margin:0 0 .5rem .5rem}
-#list{flex:1;overflow-y:auto;padding:.7rem}
+#list{position:relative;flex:1;overflow-y:auto;padding:.9rem .9rem 1.2rem}
 #list::-webkit-scrollbar{width:.5rem}
 #list::-webkit-scrollbar-thumb{background:#2a3a68;border-radius:1rem}
-.row-item{display:flex;align-items:center;width:100%;margin-bottom:.55rem;padding:.5rem;border-radius:1rem;background:rgba(255,255,255,.04);border:1px solid transparent;text-align:right;transition:background .15s,transform .15s}
+.row-item{display:flex;align-items:center;width:100%;margin-bottom:.7rem;padding:.55rem;border-radius:1rem;background:rgba(255,255,255,.04);border:1px solid transparent;text-align:right;transition:background .15s,transform .15s}
 .row-item:hover{background:rgba(255,255,255,.09)}
 .row-item.cur{background:linear-gradient(90deg,rgba(45,212,191,.2),rgba(45,212,191,.05));border-color:rgba(45,212,191,.5)}
 .th{position:relative;width:9.4rem;flex:none;border-radius:.7rem;overflow:hidden;background:#0a1020;margin-left:.8rem}
@@ -144,6 +153,34 @@ body.paused .eq i{animation-play-state:paused}
 #toast{position:fixed;bottom:2rem;left:50%;transform:translate(-50%,2rem);background:#0b1224;border:1px solid var(--line);padding:.7rem 1.4rem;border-radius:2rem;opacity:0;transition:.3s;pointer-events:none;z-index:50}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 
+/* sleep timer */
+#topEnd{display:flex;align-items:center}
+#sleepTop{margin-left:1.2rem}
+#bar .chip#bSleep{margin-left:.2rem}
+#sleepBadge{position:fixed;top:.8rem;left:.8rem;z-index:40;padding:.35rem 1rem;border-radius:2rem;background:rgba(11,18,36,.88);border:1px solid var(--line);color:#fbbf24;font-size:.95rem;font-weight:700;pointer-events:none}
+#sleepBadge.warn{background:#fb7185;color:#2a0610;border-color:#fb7185}
+#sleepDlg{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;background:rgba(5,8,18,.88);display:flex;align-items:center;justify-content:center}
+#sleepDlg .box{width:44rem;max-width:92%;padding:2rem 2.2rem;border-radius:1.4rem;background:#101830;border:1px solid var(--line);text-align:center}
+#sleepDlg h3{font-size:1.8rem;margin-bottom:.6rem}
+#sleepDlg p{color:var(--mut);font-size:1.05rem;line-height:1.6;margin-bottom:1.2rem}
+#sleepOpts{display:flex;flex-wrap:wrap;justify-content:center;margin-bottom:.4rem}
+#sleepOpts .btn{width:30%;margin:0 1.5% .9rem;padding:.8rem .4rem;font-size:1.15rem}
+#sleepOpts .btn.ghost{margin-right:1.5%}
+#sleepOpts .btn.cur{box-shadow:inset 0 0 0 .18rem #fbbf24}
+#sleepClose{margin:.3rem 0 0}
+#pinDlg{position:fixed;top:0;right:0;bottom:0;left:0;z-index:70;background:rgba(5,8,18,.92);display:flex;align-items:center;justify-content:center}
+#pinDlg .box{width:26rem;max-width:92%;padding:1.8rem 2rem;border-radius:1.4rem;background:#101830;border:1px solid var(--line);text-align:center}
+#pinDlg h3{font-size:1.5rem;margin-bottom:.8rem}
+#pinDots{font-size:2rem;letter-spacing:.3rem;color:#fbbf24;height:2.6rem}
+#pinMsg{color:var(--red);min-height:1.6rem;margin:.3rem 0 .8rem;font-size:1.05rem}
+#pinPad{display:flex;flex-wrap:wrap;justify-content:center}
+#pinPad .btn{width:30%;margin:0 1.6% .7rem;padding:.8rem 0;font-size:1.4rem}
+#pinPad .btn.ghost{margin-right:1.6%;font-size:1.1rem}
+#sleepEnd{position:fixed;top:0;right:0;bottom:0;left:0;z-index:100;background:#070b16;display:flex;align-items:center;justify-content:center;text-align:center}
+#sleepEnd .moon{font-size:7rem;line-height:1.2}
+#sleepEnd h2{font-size:2.8rem;margin:.6rem 0}
+#sleepEnd p{font-size:1.5rem;color:var(--mut)}
+
 /* theater (fullscreen) */
 body.theater #app{padding:0}
 body.theater #top,body.theater #side,body.theater #info{display:none}
@@ -153,11 +190,11 @@ body.theater #box::before{display:none}
 body.theater #overlay{padding:6rem 3rem 1.6rem}
 
 /* home (series shelf) */
-#home{display:none;flex:1;min-height:0;overflow-y:auto}
+#home{position:relative;display:none;flex:1;min-height:0;overflow-y:auto}
 body.home #home{display:block}
 body.home #main,body.home #overall,body.home #homeBtn{display:none}
 #homeBtn{margin-left:1rem}
-#shelf{display:flex;flex-wrap:wrap;padding:1rem .5rem}
+#shelf{display:flex;flex-wrap:wrap;padding:1.4rem 1rem 3rem}
 .series{width:30%;margin:0 1.5% 2rem;padding:.7rem;border-radius:1.4rem;background:#101830;border:1px solid var(--line);text-align:right;display:block;transition:transform .15s}
 .series .im{position:relative;width:100%;border-radius:1rem;overflow:hidden;background:#000}
 .series .im::before{content:"";display:block;padding-top:56.25%}
@@ -166,8 +203,7 @@ body.home #main,body.home #overall,body.home #homeBtn{display:none}
 .series h3{font-size:1.7rem}
 .series p{color:var(--mut);font-size:1.05rem;margin:.3rem 0}
 .series .cnt{color:#fbbf24;font-size:1rem;font-weight:700;margin-bottom:.6rem}
-body.kbd .series:focus{box-shadow:0 0 0 .25rem #fbbf24,0 0 1.6rem rgba(251,191,36,.45);transform:scale(1.04)}
-
+body.kbd .series:focus{box-shadow:0 0 0 .3rem #fff,0 0 0 .6rem #f59e0b,0 0 2.2rem rgba(251,191,36,.7);transform:scale(1.05);background:#1b2748}
 </style>
 </head>
 <body>
@@ -181,9 +217,12 @@ body.kbd .series:focus{box-shadow:0 0 0 .25rem #fbbf24,0 0 1.6rem rgba(251,191,3
             </div>
         </div>
         <button id="homeBtn" class="chip f">‹ المسلسلات</button>
-        <div id="overall">
-            <span id="overallTxt"></span>
-            <div class="mini"><i id="overallFill"></i></div>
+        <div id="topEnd">
+            <button id="sleepTop" class="chip f" title="مؤقت المشاهدة">⏲ المؤقت</button>
+            <div id="overall">
+                <span id="overallTxt"></span>
+                <div class="mini"><i id="overallFill"></i></div>
+            </div>
         </div>
     </header>
 
@@ -219,19 +258,21 @@ body.kbd .series:focus{box-shadow:0 0 0 .25rem #fbbf24,0 0 1.6rem rgba(251,191,3
                 <div id="overlay">
                     <div id="ovTitle"></div>
                     <div id="ctrl">
-                        <div id="seek" class="f" role="slider" tabindex="0" dir="ltr" aria-label="شريط التقدم">
+                        <div id="hint"></div>
+                        <div id="seek" class="f" role="slider" tabindex="0" dir="ltr" aria-label="شريط التقدم" title="شريط الفيديو: يمين ويسار للتقديم">
                             <div id="buf"></div><div id="fill"></div><div id="knob"></div>
                         </div>
                         <div id="bar">
                             <div class="grp">
-                                <button id="bPrev" class="ib f" title="السابق"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
-                                <button id="bPlay" class="ib big f" title="تشغيل / إيقاف"><svg id="icPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg id="icPause" viewBox="0 0 24 24" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
-                                <button id="bNext" class="ib f" title="التالي"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
-                                <button id="bBack" class="ib f" title="رجوع 10 ثوان"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6.5 12 11V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z"/></svg><span>10</span></button>
-                                <button id="bFwd" class="ib f" title="تقديم 10 ثوان"><svg viewBox="0 0 24 24"><path d="M12 5V2l5 4.5L12 11V8a5 5 0 1 0 5 5h2a7 7 0 1 1-7-8z"/></svg><span>10</span></button>
+                                <button id="bPrev" class="ib f" title="الحلقة السابقة"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
+                                <button id="bPlay" class="ib big f" title="تشغيل"><svg id="icPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg id="icPause" viewBox="0 0 24 24" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+                                <button id="bNext" class="ib f" title="الحلقة التالية"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+                                <button id="bBack" class="ib f" title="رجوع ١٠ ثوان"><svg viewBox="0 0 24 24"><path d="M12 5V2L7 6.5 12 11V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z"/></svg><span>10</span></button>
+                                <button id="bFwd" class="ib f" title="تقديم ١٠ ثوان"><svg viewBox="0 0 24 24"><path d="M12 5V2l5 4.5L12 11V8a5 5 0 1 0 5 5h2a7 7 0 1 1-7-8z"/></svg><span>10</span></button>
                                 <span id="time" dir="ltr"><span id="cur">0:00</span> / <span id="dur">0:00</span></span>
                             </div>
                             <div class="grp">
+                                <button id="bSleep" class="chip f" title="مؤقت المشاهدة">⏲ المؤقت</button>
                                 <button id="bAuto" class="chip f" title="تشغيل تلقائي للحلقة التالية">تلقائي</button>
                                 <button id="bRate" class="chip f" title="سرعة التشغيل">1x</button>
                                 <button id="bMute" class="ib f" title="كتم الصوت"><svg id="icVol" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg><svg id="icMute" viewBox="0 0 24 24" hidden><path d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5zM19 12a7 7 0 0 1-.9 3.4l1.5 1.5A9 9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12zM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.3 4.3a7 7 0 0 1-2.3 1.2v2.1a9 9 0 0 0 3.7-1.9l2 2 1.3-1.3L4.3 3zM12 4 9.9 6.1 12 8.2z"/></svg></button>
@@ -264,6 +305,50 @@ body.kbd .series:focus{box-shadow:0 0 0 .25rem #fbbf24,0 0 1.6rem rgba(251,191,3
     </main>
 
     <div id="toast"></div>
+</div>
+
+<div id="sleepBadge" hidden></div>
+
+<div id="sleepDlg" hidden>
+    <div class="box">
+        <h3>⏲ مؤقت المشاهدة</h3>
+        <p>عند انتهاء الوقت يكتمل الفيديو الحالي ثم يُغلق التطبيق تلقائياً.</p>
+        <div id="sleepOpts">
+            <button class="btn f" data-sleep="video">بعد هذا الفيديو</button>
+            <button class="btn f" data-sleep="15">15 دقيقة</button>
+            <button class="btn f" data-sleep="30">30 دقيقة</button>
+            <button class="btn f" data-sleep="45">45 دقيقة</button>
+            <button class="btn f" data-sleep="60">ساعة</button>
+            <button class="btn f" data-sleep="90">ساعة ونصف</button>
+            <button class="btn f" data-sleep="120">ساعتان</button>
+            <button class="btn ghost f" data-sleep="off">إلغاء المؤقت</button>
+            <button id="pinSet" class="btn ghost f" data-sleep="pin">تعيين رمز PIN</button>
+            <button id="pinDel" class="btn ghost f" data-sleep="unpin" hidden>حذف الرمز</button>
+        </div>
+        <button id="sleepClose" class="btn ghost f">إغلاق</button>
+    </div>
+</div>
+
+<div id="pinDlg" hidden>
+    <div class="box">
+        <h3 id="pinTitle"></h3>
+        <div id="pinDots" dir="ltr"></div>
+        <p id="pinMsg"></p>
+        <div id="pinPad" dir="ltr">
+            <button class="btn f" data-k="1">1</button><button class="btn f" data-k="2">2</button><button class="btn f" data-k="3">3</button>
+            <button class="btn f" data-k="4">4</button><button class="btn f" data-k="5">5</button><button class="btn f" data-k="6">6</button>
+            <button class="btn f" data-k="7">7</button><button class="btn f" data-k="8">8</button><button class="btn f" data-k="9">9</button>
+            <button class="btn ghost f" data-k="cancel">إلغاء</button><button class="btn f" data-k="0">0</button><button class="btn ghost f" data-k="del">⌫</button>
+        </div>
+    </div>
+</div>
+
+<div id="sleepEnd" hidden>
+    <div>
+        <div class="moon">🌙</div>
+        <h2>انتهى وقت المشاهدة</h2>
+        <p>إلى اللقاء، أحلام سعيدة</p>
+    </div>
 </div>
 <script>
 /* Generated from YouTube playlists */
@@ -1756,7 +1841,6 @@ window.LIBRARY = [
   "items": []
  }
 ];
-
 </script>
 <script>
 (function () {
@@ -1820,6 +1904,7 @@ window.LIBRARY = [
     var CHECK = '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
     function renderList() {
         var list = $('list'), arr = visibleIdx(), html = '';
+        var act = document.activeElement, keep = act && act.classList && act.classList.contains('row-item') ? act.getAttribute('data-i') : null;
         if (!arr.length) { list.innerHTML = '<div class="empty">لا توجد نتائج</div>'; return; }
         arr.forEach(function (i) {
             var it = items[i], p = S.prog[it.id], pct = p && !p.done && p.d ? Math.min(100, p.t / p.d * 100) : 0;
@@ -1830,6 +1915,8 @@ window.LIBRARY = [
                 '<div class="eq"><i></i><i></i><i></i></div><div class="check">' + CHECK + '</div></button>';
         });
         list.innerHTML = html;
+        // re-rendering must not drop the remote's focus
+        if (keep !== null) { var n = list.querySelector('[data-i="' + keep + '"]'); if (n) { var st = list.scrollTop; n.focus(); list.scrollTop = st; } }
     }
     function refreshRow(i) {
         // cheap re-render keeping scroll
@@ -1859,6 +1946,7 @@ window.LIBRARY = [
 
     function load(i, autoplay) {
         if (i < 0 || i >= items.length) return;
+        if (sleep.expired && i !== cur) { toast('انتهى وقت المشاهدة'); return; }
         cur = i;
         var it = items[i], p = S.prog[it.id];
         var start = p && !p.done && p.t > 5 && p.d && p.t < p.d - 10 ? Math.floor(p.t) : 0;
@@ -1887,14 +1975,19 @@ window.LIBRARY = [
         $('icPlay').hidden = on; $('icPause').hidden = !on;
         document.body.classList.toggle('paused', !on);
         $('bigPlay').classList.toggle('hide', on);
-        if (on) $('poster').classList.add('gone');
-        showUi();
+        $('bPlay').title = on ? 'إيقاف مؤقت' : 'تشغيل';
+        if (on) { $('poster').classList.add('gone'); if (document.activeElement === $('bigPlay')) $('bPlay').focus(); }
+        showUi(); updateHint();
     }
 
     function onState(e) {
         var st = e.data, Y = YT.PlayerState;
         if (st === Y.PLAYING) { $('spinner').classList.remove('on'); setPlayingUi(true); try { yt.setPlaybackRate(S.rate); } catch (x) {} }
-        else if (st === Y.PAUSED) { setPlayingUi(false); $('bigPlay').classList.add('hide'); saveProgress(true); }
+        else if (st === Y.PAUSED) {
+            setPlayingUi(false); $('bigPlay').classList.add('hide'); if (document.activeElement === $('bigPlay')) $('bPlay').focus(); saveProgress(true);
+            // time is up but the video was left paused: don't wait forever
+            if (sleep.expired) { clearTimeout(sleep.pt); sleep.pt = setTimeout(function () { if (!sleepPlaying()) finishSleep(); }, 15000); }
+        }
         else if (st === Y.BUFFERING) { $('spinner').classList.add('on'); }
         else if (st === Y.CUED) { $('spinner').classList.remove('on'); }
         else if (st === Y.ENDED) { setPlayingUi(false); onEnded(); }
@@ -1905,6 +1998,7 @@ window.LIBRARY = [
         var it = items[cur];
         S.prog[it.id] = { t: 0, d: it.sec, done: true }; save();
         updateOverall(); refreshRow(cur);
+        if (sleep.expired) return finishSleep();
         if (cur >= items.length - 1) { toast('انتهت جميع الحلقات 🎉'); $('poster').classList.remove('gone'); return; }
         if (!S.auto) { $('bigPlay').classList.remove('hide'); return; }
         showUpNext();
@@ -1925,6 +2019,7 @@ window.LIBRARY = [
     function cancelUpNext() { clearTimeout(upTimer); $('upnext').hidden = true; $('bigPlay').classList.remove('hide'); $('bPlay').focus(); }
 
     function onError(e) {
+        if (sleep.expired) return finishSleep();
         var code = e.data, msg, skip = false;
         if (code === 100 || code === 101 || code === 150) { msg = 'هذه الحلقة غير متاحة حالياً على يوتيوب.'; skip = true; }
         else if (code === 153 || code === 152) { msg = 'يوتيوب رفض التشغيل داخل التطبيق (خطأ ' + code + '). تأكد من اتصال الإنترنت ثم أعد المحاولة.'; }
@@ -1975,7 +2070,7 @@ window.LIBRARY = [
     function seekBy(d) { if (!ready) return; var t = yt.getCurrentTime() + d; yt.seekTo(Math.max(0, Math.min(t, yt.getDuration() - 1)), true); showUi(); toast((d > 0 ? '+' : '−') + Math.abs(d) + ' ث'); }
     function next() { if (cur < items.length - 1) { saveProgress(); load(cur + 1, true); } else toast('هذه آخر حلقة'); }
     function prev() { if (ready && yt.getCurrentTime() > 5) { yt.seekTo(0, true); return; } if (cur > 0) { load(cur - 1, true); } else toast('هذه أول حلقة'); }
-    function syncMute() { var m = ready && yt.isMuted(); $('icVol').hidden = m; $('icMute').hidden = !m; }
+    function syncMute() { var m = ready && yt.isMuted(); $('icVol').hidden = m; $('icMute').hidden = !m; $('bMute').title = m ? 'تشغيل الصوت' : 'كتم الصوت'; updateHint(); }
     function toggleMute() { if (!ready) return; if (yt.isMuted()) yt.unMute(); else yt.mute(); S.muted = yt.isMuted(); save(); syncMute(); }
     var RATES = [0.75, 1, 1.25, 1.5, 2];
     function cycleRate() { var i = RATES.indexOf(S.rate); S.rate = RATES[(i + 1) % RATES.length]; save(); if (ready) yt.setPlaybackRate(S.rate); syncChips(); toast('السرعة ' + S.rate + 'x'); }
@@ -1983,6 +2078,9 @@ window.LIBRARY = [
         $('bRate').textContent = S.rate + 'x';
         $('bAuto').classList.toggle('on', S.auto);
         $('bAuto').textContent = S.auto ? 'تلقائي: نعم' : 'تلقائي: لا';
+        $('bAuto').title = S.auto ? 'الحلقة التالية تبدأ لوحدها' : 'الحلقة التالية لا تبدأ لوحدها';
+        $('bRate').title = 'سرعة الفيديو';
+        updateHint();
         $('sortBtn').textContent = S.desc ? 'الأحدث أولاً' : 'الأقدم أولاً';
     }
     function theater(on) {
@@ -2005,8 +2103,12 @@ window.LIBRARY = [
         $('box').classList.add('ui-show');
         clearTimeout(hideTimer);
         hideTimer = setTimeout(function () {
-            if (isPlaying() && !(document.activeElement && document.activeElement.id === 'q')) $('box').classList.remove('ui-show');
-        }, 3800);
+            if (!isPlaying() || (document.activeElement && document.activeElement.id === 'q')) return;
+            $('box').classList.remove('ui-show');
+            // never leave focus on an invisible button: a stray OK would skip an episode
+            var a = document.activeElement;
+            if (a && a.closest && a.closest('#overlay')) $('bPlay').focus();
+        }, 6000);
     }
     function uiHidden() { return !$('box').classList.contains('ui-show'); }
 
@@ -2039,6 +2141,8 @@ window.LIBRARY = [
         var b = e.target.closest('.row-item'); if (!b) return;
         var i = +b.getAttribute('data-i');
         if (i === cur) { toggle(); } else { saveProgress(); load(i, true); }
+        // OK on an episode = go and watch it: hand focus to the player
+        $('bPlay').focus(); showUi();
     });
     document.querySelectorAll('[data-filter]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -2060,46 +2164,293 @@ window.LIBRARY = [
     } catch (e) {}
     function exitApp() { try { tizen.application.getCurrentApplication().exit(); } catch (e) {} }
 
-    function visible(el) { var r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && !el.closest('[hidden]') && getComputedStyle(el).visibility !== 'hidden' && (!el.closest('#overlay') || !uiHidden()); }
-    function navigate(dir) {
-        var a = document.activeElement, scope = document;
-        var cands = [].slice.call(document.querySelectorAll('.f')).filter(visible);
-        if (!$('upnext').hidden) cands = cands.filter(function (e) { return e.closest('#upnext'); });
-        else if (!$('err').hidden) cands = cands.filter(function (e) { return e.closest('#err'); });
-        if (!a || !a.classList || !a.classList.contains('f') || cands.indexOf(a) < 0) { (cands.filter(function (e) { return e.id === 'bPlay'; })[0] || cands[0]).focus(); return; }
-        var r = a.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, best = null, bs = 1e9;
-        cands.forEach(function (el) {
-            if (el === a) return;
-            var b = el.getBoundingClientRect(), dx = b.left + b.width / 2 - cx, dy = b.top + b.height / 2 - cy, p, q;
-            if (dir === 'left') { if (dx >= -2) return; p = -dx; q = Math.abs(dy); }
-            else if (dir === 'right') { if (dx <= 2) return; p = dx; q = Math.abs(dy); }
-            else if (dir === 'up') { if (dy >= -2) return; p = -dy; q = Math.abs(dx); }
-            else { if (dy <= 2) return; p = dy; q = Math.abs(dx); }
-            var s = p + q * 2.5;
-            if (s < bs) { bs = s; best = el; }
-        });
-        if (best) {
-            best.focus();
-            if (best.closest('#list')) { var L = $('list'); L.scrollTop = best.offsetTop - L.clientHeight / 2 + best.offsetHeight / 2; }
-            if (best.closest('#overlay')) showUi();
-        }
+    /* ---------- parental sleep timer ----------
+       mode 'video': close when the current video ends.
+       mode 'time' : when the time runs out, let the current video finish, then close. */
+    var sleep = { mode: null, end: 0, minutes: 0, expired: false, done: false, warned: false, tm: null, pt: null };
+    var sleepFrom = null;
+    var SLEEP_LABEL = { 15: '15 دقيقة', 30: '30 دقيقة', 45: '45 دقيقة', 60: 'ساعة', 90: 'ساعة ونصف', 120: 'ساعتين' };
+
+    function sleepPlaying() {
+        if (!ready) return false;
+        var s = yt.getPlayerState(), Y = YT.PlayerState;
+        return s === Y.PLAYING || s === Y.BUFFERING;
     }
+    function sleepUi() {
+        var on = !!sleep.mode && !sleep.done, b = $('sleepBadge');
+        b.hidden = !on; b.classList.toggle('warn', sleep.expired);
+        if (on) b.textContent = sleep.expired ? '⏲ يُغلق بعد هذا الفيديو' : '⏲ ' + fmt((sleep.end - Date.now()) / 1000);
+        $('sleepTop').classList.toggle('on', on); $('bSleep').classList.toggle('on', on);
+    }
+    function sleepTick() {
+        var left = sleep.end - Date.now();
+        if (left <= 0) {
+            clearInterval(sleep.tm); sleep.tm = null; sleep.expired = true; sleepUi();
+            if (sleepPlaying()) toast('انتهى الوقت، سيُغلق التطبيق بعد هذا الفيديو'); else finishSleep();
+            return;
+        }
+        if (left <= 60000 && !sleep.warned) { sleep.warned = true; toast('متبقي دقيقة واحدة على إغلاق التطبيق'); }
+        sleepUi();
+    }
+    function setSleep(v) {
+        if (v === 'video' && inHome) { toast('ابدأ فيديو أولاً ثم اختر هذا الخيار'); return; }
+        clearInterval(sleep.tm); clearTimeout(sleep.pt);
+        sleep.tm = null; sleep.mode = null; sleep.expired = false; sleep.warned = false;
+        if (v === 'off') toast('تم إلغاء المؤقت');
+        else if (v === 'video') { sleep.mode = 'video'; sleep.expired = true; toast('سيُغلق التطبيق بعد انتهاء هذا الفيديو'); }
+        else {
+            sleep.mode = 'time'; sleep.minutes = +v; sleep.end = Date.now() + sleep.minutes * 60000;
+            sleep.tm = setInterval(sleepTick, 1000);
+            toast('المؤقت: ' + SLEEP_LABEL[v]);
+        }
+        sleepUi(); closeSleepDlg();
+    }
+    function syncSleepDlg() {
+        var cur = sleep.mode === 'video' ? 'video' : sleep.mode === 'time' ? String(sleep.minutes) : 'off';
+        [].forEach.call(document.querySelectorAll('#sleepOpts .btn'), function (b) { b.classList.toggle('cur', b.getAttribute('data-sleep') === cur); });
+        $('pinSet').textContent = S.pin ? 'تغيير الرمز' : 'تعيين رمز PIN';
+        $('pinDel').hidden = !S.pin;
+    }
+    function showSleepDlg() {
+        syncSleepDlg(); showUi();
+        $('sleepDlg').hidden = false;
+        (document.querySelector('#sleepOpts .cur') || document.querySelector('#sleepOpts .btn')).focus();
+    }
+    function openSleepDlg() {
+        if (sleep.expired) { toast('انتهى الوقت، سيُغلق التطبيق بعد هذا الفيديو'); return; }
+        sleepFrom = document.activeElement;
+        if (!S.pin) return showSleepDlg();
+        pinAsk('أدخل رمز PIN', function (p) {
+            if (Date.now() < pin.lock) return pinMsg('محاولات كثيرة، حاول بعد قليل');
+            if (hashPin(p) === S.pin) { pin.fails = 0; pinClose(); showSleepDlg(); return; }
+            if (++pin.fails >= 3) { pin.fails = 0; pin.lock = Date.now() + 60000; pinMsg('رمز خاطئ، حاول بعد دقيقة'); }
+            else pinMsg('رمز خاطئ');
+        });
+    }
+
+    /* PIN: the timer dialog is only reachable with it, so children can't cancel or change the timer */
+    var pin = { buf: '', cb: null, from: null, fails: 0, lock: 0 };
+    function hashPin(p) { var h = 5381, s = 'yb:' + p; for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return String(h); }
+    function pinMsg(t) { $('pinMsg').textContent = t || ''; pin.buf = ''; pinDots(); }
+    function pinDots() { var n = pin.buf.length; $('pinDots').textContent = (new Array(n + 1).join('● ') + new Array(5 - n).join('○ ')).trim(); }
+    function pinAsk(title, cb) {
+        if ($('pinDlg').hidden) pin.from = document.activeElement;
+        pin.cb = cb; pin.buf = ''; pinDots();
+        $('pinTitle').textContent = title; $('pinMsg').textContent = '';
+        $('pinDlg').hidden = false;
+        document.querySelector('#pinPad [data-k="5"]').focus();
+    }
+    function pinClose() {
+        $('pinDlg').hidden = true; pin.cb = null; pin.buf = '';
+        if (pin.from && pin.from.focus && visible(pin.from)) pin.from.focus();
+        pin.from = null;
+    }
+    function pinKey(k) {
+        if (k === 'cancel') { sleepFrom = null; return pinClose(); }
+        if (k === 'del') { pin.buf = pin.buf.slice(0, -1); $('pinMsg').textContent = ''; return pinDots(); }
+        if (pin.buf.length >= 4) return;
+        pin.buf += k; pinDots();
+        if (pin.buf.length === 4) { var p = pin.buf, cb = pin.cb; setTimeout(function () { if (cb && pin.cb === cb) cb(p); }, 120); }
+    }
+    function setPin() {
+        pinAsk('اختر رمزاً من 4 أرقام', function (p1) {
+            pinAsk('أعد إدخال الرمز للتأكيد', function (p2) {
+                if (p2 !== p1) return pinMsg('الرمزان غير متطابقين');
+                S.pin = hashPin(p1); save(); pinClose(); syncSleepDlg(); toast('تم حفظ الرمز');
+            });
+        });
+    }
+    function closeSleepDlg() {
+        $('sleepDlg').hidden = true; showUi();
+        if (sleepFrom && sleepFrom.focus && visible(sleepFrom)) sleepFrom.focus();
+        sleepFrom = null;
+    }
+    function finishSleep() {
+        if (sleep.done) return;
+        sleep.done = true;
+        clearInterval(sleep.tm); clearTimeout(sleep.pt); clearTimeout(upTimer); clearTimeout(errTimer);
+        try { saveProgress(); } catch (e) {}
+        try { if (ready) yt.stopVideo(); } catch (e) {}
+        $('upnext').hidden = true; $('err').hidden = true; $('sleepDlg').hidden = true; $('pinDlg').hidden = true; $('sleepBadge').hidden = true;
+        try { document.activeElement.blur(); } catch (e) {}
+        $('sleepEnd').hidden = false;
+        setTimeout(function () { exitApp(); try { window.close(); } catch (e) {} }, 4000);
+    }
+    $('sleepTop').addEventListener('click', openSleepDlg);
+    $('bSleep').addEventListener('click', openSleepDlg);
+    $('sleepClose').addEventListener('click', closeSleepDlg);
+    $('sleepOpts').addEventListener('click', function (e) {
+        var b = e.target; while (b && b !== this && !b.getAttribute('data-sleep')) b = b.parentNode;
+        if (!b || b === this) return;
+        var v = b.getAttribute('data-sleep');
+        if (v === 'pin') setPin();
+        else if (v === 'unpin') { S.pin = ''; save(); syncSleepDlg(); toast('تم حذف الرمز'); showSleepDlg(); }
+        else setSleep(v);
+    });
+    $('pinPad').addEventListener('click', function (e) {
+        var b = e.target; while (b && b !== this && !b.getAttribute('data-k')) b = b.parentNode;
+        if (b && b !== this) pinKey(b.getAttribute('data-k'));
+    });
+
+    /* Navigation model (kid friendly, predictable):
+       two zones - the player (right) and the episode list (left).
+       Up/Down move row by row, Left/Right move along a row; at the edge of a row
+       focus hops to the other zone. Rows are read from the screen, so it always
+       matches what the child sees. */
+    var mem = { list: null }, backAt = 0, glideRaf = 0;
+
+    function inOverlay(el) { return !!(el && el.closest && el.closest('#overlay')); }
+    function zoneOf(el) { return el.closest('#side') ? 'side' : el.closest('#top') ? 'top' : 'player'; }
+    function visible(el) {
+        var r = el.getBoundingClientRect();
+        if (el.id === 'bigPlay' && el.classList.contains('hide')) return false;
+        return r.width > 0 && r.height > 0 && !el.closest('[hidden]') && getComputedStyle(el).visibility !== 'hidden' && (!inOverlay(el) || !uiHidden());
+    }
+    function candidates() {
+        var c = [].slice.call(document.querySelectorAll('.f')).filter(visible);
+        if (!$('pinDlg').hidden) return c.filter(function (e) { return e.closest('#pinDlg'); });
+        if (!$('sleepDlg').hidden) return c.filter(function (e) { return e.closest('#sleepDlg'); });
+        if (!$('upnext').hidden) return c.filter(function (e) { return e.closest('#upnext'); });
+        if (!$('err').hidden) return c.filter(function (e) { return e.closest('#err'); });
+        return c;
+    }
+    function rowsOf(els) {
+        var info = els.map(function (el) { var r = el.getBoundingClientRect(); return { el: el, x: r.left + r.width / 2, y: r.top + r.height / 2, h: r.height }; });
+        info.sort(function (a, b) { return a.y - b.y; });
+        var rows = [];
+        info.forEach(function (n) {
+            var last = rows[rows.length - 1];
+            if (last && Math.abs(n.y - last.y) < Math.max(n.h, last.h) * 0.5) last.items.push(n);
+            else rows.push({ y: n.y, h: n.h, items: [n] });
+        });
+        rows.forEach(function (r) { r.items.sort(function (a, b) { return a.x - b.x; }); });
+        return rows;
+    }
+
+    // smooth, interruptible scroll (old TV browsers have no scroll-behavior)
+    function glide(L, to) {
+        to = Math.max(0, Math.min(to, L.scrollHeight - L.clientHeight));
+        cancelAnimationFrame(glideRaf);
+        var from = L.scrollTop, t0 = Date.now();
+        if (Math.abs(to - from) < 2) return;
+        (function step() {
+            var p = Math.min(1, (Date.now() - t0) / 220), e = 1 - Math.pow(1 - p, 3);
+            L.scrollTop = from + (to - from) * e;
+            if (p < 1) glideRaf = requestAnimationFrame(step);
+        })();
+    }
+    function focusEl(el) {
+        if (!el) return;
+        var sc = el.closest('#list') || el.closest('#home'), st = sc ? sc.scrollTop : 0;
+        el.focus();
+        if (sc) { sc.scrollTop = st; glide(sc, el.offsetTop - sc.clientHeight / 2 + el.offsetHeight / 2); } // glide instead of the browser's jump
+        if (inOverlay(el)) showUi();
+    }
+    function bump(el) {
+        el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+        setTimeout(function () { el.classList.remove('bump'); }, 400);
+    }
+    function listTarget() {
+        var q = mem.list !== null ? $('list').querySelector('[data-i="' + mem.list + '"]') : null;
+        return q || $('list').querySelector('.row-item.cur') || $('list').querySelector('.row-item');
+    }
+    // where focus goes when nothing (or something invisible) is focused
+    function entryTarget(cands) {
+        var by = function (f) { return cands.filter(f)[0]; };
+        var lt = listTarget();
+        return by(function (e) { return e.classList.contains('series'); }) || by(function (e) { return e.id === 'bPlay'; }) ||
+            (lt && cands.indexOf(lt) >= 0 ? lt : null) || cands[0];
+    }
+    function sideIsLeft() { return $('side').getBoundingClientRect().left < $('left').getBoundingClientRect().left; }
+
+    function navigate(dir) {
+        var cands = candidates(), a = document.activeElement;
+        if (!a || !a.classList || !a.classList.contains('f') || cands.indexOf(a) < 0) {
+            return focusEl(entryTarget(cands));
+        }
+        var zone = zoneOf(a), modal = !$('pinDlg').hidden || !$('sleepDlg').hidden || !$('upnext').hidden || !$('err').hidden;
+        var rows = rowsOf(cands.filter(function (e) { return zoneOf(e) === zone; })), ri = -1, ci = -1;
+        rows.forEach(function (r, i) { r.items.forEach(function (n, j) { if (n.el === a) { ri = i; ci = j; } }); });
+        if (ri < 0) return;
+        var me = rows[ri].items[ci];
+
+        if (dir === 'up' || dir === 'down') {
+            var t = rows[ri + (dir === 'down' ? 1 : -1)];
+            if (!t && !modal && zone !== 'top' && dir === 'up') {            // above the first row: the header buttons
+                var tops = cands.filter(function (e) { return zoneOf(e) === 'top'; });
+                if (tops.length) { var tr = rowsOf(tops)[0].items, tp = tr[0]; tr.forEach(function (n) { if (Math.abs(n.x - me.x) < Math.abs(tp.x - me.x)) tp = n; }); return focusEl(tp.el); }
+            }
+            if (!t && !modal && zone === 'top' && dir === 'down') {          // below the header: the content
+                var below = cands.filter(function (e) { return zoneOf(e) !== 'top'; });
+                if (below.length) return focusEl(entryTarget(below));
+            }
+            if (!t) return bump(a);
+            var pick = t.items[0];
+            t.items.forEach(function (n) { if (Math.abs(n.x - me.x) < Math.abs(pick.x - me.x)) pick = n; });
+            // coming back to the list from search/filters lands on your episode, not the top
+            if (pick.el.classList.contains('row-item') && !a.classList.contains('row-item')) pick.el = listTarget() || pick.el;
+            return focusEl(pick.el);
+        }
+
+        var nxt = rows[ri].items[ci + (dir === 'right' ? 1 : -1)];
+        if (nxt) return focusEl(nxt.el);
+        if (modal || zone === 'top' || inHome) return bump(a);
+
+        // edge of the row -> hop to the other zone, only if it lies in that direction
+        var toSide = zone === 'player', wantLeft = toSide === sideIsLeft();
+        if ((dir === 'left') !== wantLeft) return bump(a);
+        if (!toSide && uiHidden()) showUi();
+        var other = candidates().filter(function (e) { return zoneOf(e) === (toSide ? 'side' : 'player'); });
+        if (!other.length) return bump(a);
+        if (toSide) return focusEl(listTarget() || other[0]);
+        focusEl(other.filter(function (e) { return e.id === 'bPlay'; })[0] || other[0]);
+    }
+
+    function updateHint() {
+        var a = document.activeElement;
+        $('hint').textContent = inOverlay(a) && !uiHidden() ? (a.getAttribute('title') || '') : '';
+    }
+    document.addEventListener('focusin', function (e) {
+        var t = e.target;
+        if (!t || !t.classList || !t.classList.contains('f')) return;
+        if (t.classList.contains('row-item')) mem.list = t.getAttribute('data-i');
+        updateHint();
+    });
 
     document.addEventListener('mousemove', function () { document.body.classList.remove('kbd'); });
     document.addEventListener('keydown', function (e) {
+        if (sleep.done) { e.preventDefault(); return; }
         document.body.classList.add('kbd');
-        var k = e.keyCode, typing = document.activeElement && document.activeElement.id === 'q';
+        var k = e.keyCode, a = document.activeElement, typing = a && a.id === 'q';
+        if (!$('pinDlg').hidden) {
+            var pd = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' }[k];
+            e.preventDefault();
+            if (pd) navigate(pd);
+            else if (k >= 48 && k <= 57) pinKey(String(k - 48));
+            else if (k >= 96 && k <= 105) pinKey(String(k - 96));
+            else if (k === 8) pinKey('del');
+            else if (k === 10009 || k === 27) pinKey('cancel');
+            else if (k === 13 && document.activeElement && document.activeElement.getAttribute('data-k')) pinKey(document.activeElement.getAttribute('data-k'));
+            return;
+        }
+        if (!$('sleepDlg').hidden) {
+            if (k === 10009 || k === 27 || k === 8) { e.preventDefault(); return closeSleepDlg(); }
+            var sd = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' }[k];
+            if (sd) { e.preventDefault(); navigate(sd); }
+            return; // Enter activates the focused button natively
+        }
         var inTheater = document.body.classList.contains('theater');
-        var onSeek = document.activeElement && document.activeElement.id === 'seek';
+        var onSeek = a && a.id === 'seek';
 
-        // Back / return
+        // Back / return: step out one level at a time, exit needs a second press
         if (k === 10009 || k === 27 || (k === 8 && !typing)) {
             e.preventDefault();
             if (!$('upnext').hidden) return cancelUpNext();
             if (typing) { $('q').blur(); return $('resumeBtn').focus(); }
             if (inTheater) return theater(false);
             if (!inHome) return goHome();
-            return exitApp();
+            if (Date.now() - backAt < 2500) return exitApp();
+            backAt = Date.now(); return toast('اضغط رجوع مرة أخرى للخروج');
         }
         // Media keys
         if (k === 415 || k === 19 || k === 10252) { e.preventDefault(); return k === 415 ? (isPlaying() || toggle()) : k === 19 ? (isPlaying() && toggle()) : toggle(); }
@@ -2112,16 +2463,16 @@ window.LIBRARY = [
         var dir = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' }[k];
         if (dir) {
             e.preventDefault();
-            if (onSeek && (dir === 'left' || dir === 'right')) { seekBy(dir === 'right' ? 10 : -10); return; }
-            if (inTheater && uiHidden() && (dir === 'left' || dir === 'right')) { seekBy(dir === 'right' ? 10 : -10); return; }
-            if (inTheater && uiHidden()) { showUi(); return $('bPlay').focus(); }
-            if (inTheater && !uiHidden()) showUi();
+            var lr = dir === 'left' || dir === 'right';
+            if (onSeek && lr) { seekBy(dir === 'right' ? 10 : -10); return; }
+            if (inOverlay(a) && uiHidden()) { showUi(); return; } // first press only wakes the controls
+            if (inTheater && uiHidden()) { if (lr) { seekBy(dir === 'right' ? 10 : -10); return; } showUi(); return focusEl($('bPlay')); }
+            if (inOverlay(a)) showUi();
             return navigate(dir);
         }
         if (k === 13) {
             if (inHome) return;
-            var a = document.activeElement;
-            if (inTheater && uiHidden()) { e.preventDefault(); showUi(); return toggle(); }
+            if ((inTheater || inOverlay(a)) && uiHidden()) { e.preventDefault(); showUi(); return toggle(); }
             if (!a || a === document.body) { e.preventDefault(); return toggle(); }
             if (a.id === 'seek') { e.preventDefault(); return toggle(); }
             return; // buttons handle Enter natively
@@ -2166,6 +2517,7 @@ window.LIBRARY = [
     }
     function goHome() {
         saveProgress();
+        if (sleep.expired) return finishSleep();
         clearTimeout(upTimer); clearTimeout(errTimer);
         $('upnext').hidden = true; $('err').hidden = true;
         try { if (ready) yt.stopVideo(); } catch (e) {}
@@ -2214,7 +2566,6 @@ window.LIBRARY = [
     loadRemote();
     setTimeout(function () { var c = document.querySelector('.series'); if (c) c.focus(); }, 300);
 })();
-
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
 </body>
